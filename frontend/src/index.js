@@ -1,22 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import { restoreSession } from './store/csrf';
+import configureStore from './store';
 import { loginUser, logoutUser, signupUser } from './store/usersReducer';
-import { Store } from 'redux';
+import { csrfFetch, restoreSession } from './store/csrf';
+// import { Store } from 'redux';
 
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
+const store = configureStore()
 
 // testing
-window.store = store;
+if (process.env.NODE_ENV !== 'production') {
+  window.store = store;
+  window.csrfFetch = csrfFetch;
+}
 window.loginUser = loginUser;
 window.logoutUser = logoutUser;
 window.signupUser = signupUser;
@@ -29,7 +28,6 @@ const initializeApp = () => {
       initialState = {
         users: {
           [currentUser.id] : currentUser
-          // if we need to get a value from a key we need to wrap in it square brackets
         }
       }
     }
@@ -37,7 +35,9 @@ const initializeApp = () => {
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -46,4 +46,6 @@ ReactDOM.render(
 
 // ensure that we check id we are logged in before initalizing our app
 // sets up csrf and currentUser if we need it
+
+
 restoreSession().then(initializeApp);

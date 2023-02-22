@@ -7,7 +7,7 @@ export const restoreSession = async () => {
     sessionStorage.setItem('currentUser', JSON.stringify(data.user))
 }
 
-export const csrfFetch = async(url, options = {}) => {
+export const csrfFetch = async (url, options = {}) => {
     options.method ||= 'GET';
     options.headers ||= {};
     
@@ -17,5 +17,6 @@ export const csrfFetch = async(url, options = {}) => {
     }
 
     const res = await fetch(url, options);
-    return res
+    if (res.status >= 400) throw res;
+    return res;
 }

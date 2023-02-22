@@ -2,6 +2,7 @@ class Api::SessionsController < ApplicationController
 
     before_action :require_logged_out, only: [:create]
     before_action :require_logged_in, only: [:destroy]
+    # skip_before_action :verify_authenticity_token
 
   def show
     @user = current_user
