@@ -13,31 +13,32 @@ class Api::SessionsController < ApplicationController
     end
   end
     
-# THIS IS THE ORIGINAL I HAS BEFORE
-  # def create
-  #   @user = User.find_by_credentials(params[:email], params[:password])
-  #     if @user
-  #       login!(@user)
-  #       render json: @user
-  #     else
-  #       render json: { errors: ['The provided credentials were invalid.'] }, status: :unauthorized
-  #     end
-  # end
 
-# THIS IS FORM THE LECTURE
   def create
-    email = params[:email]
-    password = params[:password]
-    @user = User.find_by_credentials(email, password)
-
-      if @user 
+    # debugger
+    @user = User.find_by_credentials(params[:email], params[:password])
+      if @user
         login!(@user)
         render 'api/users/show'
       else
-        render json: { errors: ['The provided credentials were invalid.'] }, status: 422
+        render json: { errors: ['The provided credentials were invalid.'] }, status: :unauthorized
       end
-
   end
+
+# THIS IS FORM THE LECTURE
+  # def create
+  #   email = params[:email]
+  #   password = params[:password]
+  #   @user = User.find_by_credentials(email, password)
+
+  #     if @user 
+  #       login!(@user)
+  #       render 'api/users/show'
+  #     else
+  #       render json: { errors: ['The provided credentials were invalid.'] }, status: 422
+  #     end
+
+  # end
 
   def destroy
     logout!
