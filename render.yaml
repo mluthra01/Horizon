@@ -2,7 +2,7 @@ databases:
   - name: horizon
     user: horizon
     plan: free
-    region: ohio
+    region: oregon
 
 services:
   - type: web
