@@ -4,16 +4,15 @@ import {Link, NavLink, useHistory} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 const Header = () => {
 
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
-  const [button, setButton] = useState(user ? 'Sign out' : 'Sign in')
-  const history = useHistory();
+  // const [button, setButton] = useState(user ? 'Sign out' : 'Sign in')
+  // const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -101,7 +100,7 @@ return (
                 0
           </div>
           <div className="header-cart-img">
-              <img src='/assets/cart.png'/>
+              <img src='/assets/cart.png' alt='cart_logo'/>
           </div>
           <div className='header-cart-label'>
               Cart

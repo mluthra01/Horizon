@@ -1,9 +1,8 @@
-import {  useEffect, useState } from 'react';
+import {  useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import * as sessionActions from '../../store/session';
-import { Redirect, Link, Navigate  } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import './LoginForm.css'
-import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const LoginFormPage = () => {

@@ -1,5 +1,30 @@
 {
   "dependencies": {
     "normalize.css": "^8.0.1"
-  }
+  },
+  "name": "horizon",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines" : {
+    "node": "16.19.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mluthra01/Horizon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mluthra01/Horizon/issues"
+  },
+  "homepage": "https://github.com/mluthra01/Horizon#readme"
 }

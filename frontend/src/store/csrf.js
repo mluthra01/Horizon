@@ -8,7 +8,6 @@
 // }
 
 const csrfFetch = async (url, options = {}) => {
-    // debugger
     options.method ||= 'GET';
     options.headers ||= {};
     
