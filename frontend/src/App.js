@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
+import CategoryBar from './components/CategoryBar/CategoryBar';
 import Header from './components/header/header';
 import LoginFormPage from './components/LoginFormPage/LoginForm';
 import SignUpFormPage from './components/SignupFormPage/SignUpForm';
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Header />
+          <CategoryBar />
         </Route>
       <Route exact path="/login">
         <LoginFormPage />

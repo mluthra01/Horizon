@@ -85,8 +85,10 @@
 }
 
 .signup-form-errors {
+    display: block;
     color: red;
     margin-bottom: 20px;
+    font-size: 10px;
 }
 
 .signup-form-button {

@@ -1,55 +1,70 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from  "../../store/session";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import './SignUpForm.css'
 
 const SignUpFormPage = () => {
 
     const dispatch = useDispatch();
-    // const sessionUser = useSelector(state => state.session.user);
+    const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState("");
     const [errors, setErrors] = useState([]);
+    const buttonText = email.length > 0 ? 'Verify Email' : 'Continue'
+    if (sessionUser) return <Redirect to="/" />;
 
-    // if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({name, email, password}))
-                .catch(async (res) => {
-                    let data;
+                        .then(() => {
+                        history.push('/');
+                                        })
+
+                .catch(async (response) => {
+                let data;
                     try {
-                        data = await res.clone().json();
+                        data = await response.clone().json();
                     }
                     catch {
-                        data = await res.text();
+                        data = await response.text();
                     }
-                    if (data?.errors) setErrors(data.errors);
-                    else if (data) setErrors([data]);
-                    else setErrors([res.statusText]);
+                    if (data && data.errors) {
+                        setErrors(data.errors) 
+                    }
+                    else if (data) {
+                        setErrors( [data]);
+                    }
+                    else {
+                        setErrors([ response.statusText]);
+                    }
                 });
-        }
+        };
+            
             return setErrors(['Passwords do not match'])
-    }
+    };
+
+
 
     return (
         <div className="signup-form-container">
             <Link to={'./'}>
             <img 
                 className='signup-logo'
-                src="/logo.png" alt='black-logo'
+                src="/assets/logo.png" alt='black-logo'
             />
             </Link>
             
             <form onSubmit={handleSubmit} className="signup-form">
                 <h1>Create account</h1>
                 <ul className="signup-form-errors">
-                    {errors.map(error => <li key={error}></li>)}
+                    {errors.map(error => <li key={error}>{error}<br/></li>)}
                 </ul>
                 <label className="signup-form-label">Your name
                     <input
@@ -69,7 +84,9 @@ const SignUpFormPage = () => {
                     // required
                     className='signup-form-input'
                     />
+        
                 </label>
+    
                 <label  className="signup-form-label"> Password
                     <input 
                     type='password' 
@@ -94,7 +111,7 @@ const SignUpFormPage = () => {
                     className='signup-form-input'
                     />
                 </label>
-                <button  className="signup-form-button">Sign Up</button>
+                <button  className="signup-form-button">{buttonText}</button>
 
 
                 <div>
