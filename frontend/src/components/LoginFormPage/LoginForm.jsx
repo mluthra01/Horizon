@@ -78,7 +78,7 @@ const LoginFormPage = () => {
                 type='text'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} 
-                required
+                // required
                 className='login-form-input'
             />
             
@@ -89,7 +89,7 @@ const LoginFormPage = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                // required
                 className='login-form-input'
                 placeholder='  At least 6 characters'
                     
