@@ -5,7 +5,7 @@ import { fetchProduct, receiveProduct } from "../../../store/product";
 import Review from "../../Reviews/Reviews";
 import './ProductShowPage.css'
 
-const ProductShow = () => {
+const ProductShow = ({prodcuts}) => {
 
 const dispatch = useDispatch();
 const { productId } = useParams();
