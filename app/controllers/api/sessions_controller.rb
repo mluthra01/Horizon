@@ -24,21 +24,6 @@ class Api::SessionsController < ApplicationController
       end
   end
 
-# THIS IS FORM THE LECTURE
-  # def create
-  #   email = params[:email]
-  #   password = params[:password]
-  #   @user = User.find_by_credentials(email, password)
-
-  #     if @user 
-  #       login!(@user)
-  #       render 'api/users/show'
-  #     else
-  #       render json: { errors: ['The provided credentials were invalid.'] }, status: 422
-  #     end
-
-  # end
-
   def destroy
     logout!
     render json: { message: 'success' }

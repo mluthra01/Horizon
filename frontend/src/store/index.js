@@ -2,11 +2,13 @@ import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import session from "./session";
+import products from "./product";
 import { compose } from "redux";
 
 
 const rootReducer = combineReducers({
-    session
+    session,
+    products
 });
 
 

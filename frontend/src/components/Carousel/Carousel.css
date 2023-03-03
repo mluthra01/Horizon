@@ -1,0 +1,65 @@
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-slider .slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+.slick-slider .slick-slide img {
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.slick-slider .slick-slide.slick-active {
+    display: block;
+}
+
+.slick-slider .slick-dots {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    z-index: 10;
+}
+
+.slick-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.slick-slider .slick-dots li button {
+    display: block;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    background-color: #ddd;
+    border-radius: 50%;
+    text-indent: -9999px;
+    cursor: pointer;
+    outline: none;
+}
+
+.slick-slider .slick-dots li.slick-active button {
+    background-color: #007185;
+}

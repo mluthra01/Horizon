@@ -5,18 +5,23 @@ import { useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
 import { useState } from 'react';
+import { searchProducts } from '../../store/product';
 
 
 const Header = () => {
 
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
-  // const [button, setButton] = useState(user ? 'Sign out' : 'Sign in')
-  // const history = useHistory();
+  const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    dispatch(searchProducts(searchQuery));
   };
 
 
@@ -46,10 +51,15 @@ return (
 
 
     {/* SEARCH BAR */}
-        <div className="header-search">
-              <input  type="text" className="header-search-input" />
-              <i className='fa-solid fa-magnifying-glass search-icon'/>
-        </div>
+        <form className="header-search" onSubmit={handleSearch}>
+              <input 
+                type="text"
+                className="header-search-input" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}/>
+              <i className='fa-solid fa-magnifying-glass search-icon'
+                />
+        </form>
   
   
     {/* PROFILE BUTTON */}
