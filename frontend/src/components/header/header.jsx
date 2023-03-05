@@ -6,17 +6,17 @@ import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { fetchProducts, searchProducts } from '../../store/product';
-import ProductShow from '../Products/ProductShowPage/ProductShowPage';
+// import ProductShow from '../Products/ProductShowPage/ProductShowPage';
 
 
 const Header = () => {
 
   const user = useSelector(state => state.session.user)
-  const products = useSelector(state => state.products)
+  // const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const history = useHistory();
+  // const history = useHistory();
   const cartItems = useSelector(state => state.cartItems)
   // const [searchResults, setSearchResults] = useState([]);
   // console.log(Object.values(cartItems))

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import CategoryBar from './components/CategoryBar/CategoryBar';
-import Header from './components/Header/Header';
+import Header from './components/header/header';
 import LoginFormPage from './components/LoginFormPage/LoginForm';
 import SignUpFormPage from './components/SignupFormPage/SignUpForm';
 import Footer from './components/Footer/Footer';
