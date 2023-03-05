@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import CategoryBar from './components/CategoryBar/CategoryBar';
-import Header from './components/Header/Header';
+import Header from './components/header/Header';
 import LoginFormPage from './components/LoginFormPage/LoginForm';
 import SignUpFormPage from './components/SignupFormPage/SignUpForm';
 import Footer from './components/Footer/Footer';
@@ -10,7 +10,7 @@ import ProductIndex from './components/Products/ProductsIndex/ProductIndex';
 import ProductShow from './components/Products/ProductShowPage/ProductShowPage';
 import CategoryIndex from './components/Category/CategoryIndex';
 import CartItem from './components/CartItems/CartItemsIndex';
-import Home from './components/home/home';
+
 import Homepage from './components/Homepage/Homepage';
 
 
@@ -25,7 +25,6 @@ function App() {
         <CategoryBar />
         {/* <Carousel images={images} /> */}
         <Homepage />
-        {/* <Home /> */}
         <Footer />
       </Route>
       <Route exact path="/login">
