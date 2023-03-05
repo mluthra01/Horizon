@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './header.css';
+import './Header.css';
 import {Link, NavLink, useHistory} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session'

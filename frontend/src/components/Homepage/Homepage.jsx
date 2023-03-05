@@ -2,7 +2,11 @@
 import './Homepage.css'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { receiveProducts } from '../../store/product';
+import { recieveProductsByCategory } from '../../store/category';
+import { useEffect } from 'react';
+import { fetchProductsByCategory } from '../../store/category';
+import { useDispatch } from 'react-redux';
+
 
 
 
@@ -11,17 +15,27 @@ import { receiveProducts } from '../../store/product';
 
 const Homepage = () => {
 
-const products = useSelector(receiveProducts)
+const products = useSelector(recieveProductsByCategory());
+const dispatch = useDispatch();
 
+    let prodId;
     products.map(product => {
-        console.log(product.id)
+        prodId = product.categoryId
     });
 
+    useEffect(() => {
+            // products.map(product => {
+        dispatch(fetchProductsByCategory(prodId))
+    },[dispatch, prodId])
+// })
+
 return (
-        <div className='hompafe-container'>
-            
+        <div className='homepage-container'>
+
             <NavLink to='/category/1'>
-            <div className='grid-container'>Electronics</div>
+            <div className='grid-container'>Electronics
+
+            </div>
             </NavLink>
 
             <NavLink to='/category/2'>
