@@ -1,33 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './header.css';
 import {Link, NavLink, useHistory} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
 import { useState } from 'react';
-import { searchProducts } from '../../store/product';
+import { fetchProducts, searchProducts } from '../../store/product';
+import ProductShow from '../Products/ProductShowPage/ProductShowPage';
 
 
 const Header = () => {
 
   const user = useSelector(state => state.session.user)
+  const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+  const cartItems = useSelector(state => state.cartItems)
+  // const [searchResults, setSearchResults] = useState([]);
+  // console.log(Object.values(cartItems))
+    useEffect(() => {
+      dispatch(fetchProducts())
+    },[dispatch])
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+    const handleSearch =  (e) => {
+      e.preventDefault();
+      (dispatch(searchProducts(searchQuery)));
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    dispatch(searchProducts(searchQuery));
-  };
+    };
 
 
-  // for header we need logo in the left, then address, then search, then sign in,
-  // dropdown, then returns and orders, then cart
+    
+    let total = 0;
+    Object.keys(cartItems).map(cartItemId => {
+      if (user && user.id === cartItems[cartItemId].userId) {
+        total += cartItems[cartItemId].quantity;
+      }
+      else {
+        total = 0
+      }
+      return total
+    })
 
+
+
+    
 return (
 <div className="header">
     {/* LOGO */}
@@ -79,7 +97,7 @@ return (
         </div>
 
         {user && <div className="dropdown">
-                <div className="dropdown__toggle" onMouseEnter={toggleMenu} onMouseLeave={!toggleMenu} >
+                <div className="dropdown__toggle" onMouseEnter={() => setIsOpen(!isOpen)} onMouseLeave={() => setIsOpen(isOpen)} >
                 <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i>
                 </div>
               {isOpen && (
@@ -105,9 +123,13 @@ return (
 
 
     {/* CART-ITEMS */}
+    
+    <Link to={user ? '/cart' : '/login'}>
       <div className="header-cart-items">
           <div className='header-cart-count'>
-                0
+            {total}
+            {/* {getCartItemLength} */}
+                {/* {cartItem ? getCartItemLength(cartItem) : 0} */}
           </div>
           <div className="header-cart-img">
               <img src='/assets/cart.png' alt='cart_logo'/>
@@ -116,11 +138,10 @@ return (
               Cart
           </div>
       </div>
-        
+      </Link>
           
     
 </div>
   );
 }
 export default Header;
-

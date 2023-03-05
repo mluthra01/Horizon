@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  email           :string           not null
+#  name            :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class User < ApplicationRecord
 
   validates :email, :session_token, presence: true, uniqueness: true
@@ -13,6 +25,16 @@ class User < ApplicationRecord
 
   has_secure_password
   before_validation :ensure_session_token
+
+  has_many :cart_items,
+    foreign_key: :user_id,
+    class_name: :CartItem,
+    dependent: :destroy
+
+    has_many :reviews,
+      foreign_key: :reviewer_id,
+      class_name: :Review,
+      dependent: :destroy
 
 
   def self.find_by_credentials(email, password)

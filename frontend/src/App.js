@@ -5,12 +5,14 @@ import Header from './components/Header/Header';
 import LoginFormPage from './components/LoginFormPage/LoginForm';
 import SignUpFormPage from './components/SignupFormPage/SignUpForm';
 import Footer from './components/Footer/Footer';
-// import Homepage from './components/Homepage/Homepage';
 import './reset.css'
 import ProductIndex from './components/Products/ProductsIndex/ProductIndex';
 import ProductShow from './components/Products/ProductShowPage/ProductShowPage';
 import CategoryIndex from './components/Category/CategoryIndex';
-// import Carousel from './components/Carousel/Carousel';
+import CartItem from './components/CartItems/CartItemsIndex';
+import Home from './components/home/home';
+import Homepage from './components/Homepage/Homepage';
+
 
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
         <Header />
         <CategoryBar />
         {/* <Carousel images={images} /> */}
-        {/* <Homepage /> */}
+        <Homepage />
         {/* <Home /> */}
         <Footer />
       </Route>
@@ -50,6 +52,18 @@ function App() {
         <CategoryBar />
         <CategoryIndex />
         <Footer />
+      </Route>
+      <Route exact path="/cart">
+          <Header />
+          <CategoryBar />
+          <CartItem />
+          <Footer />
+      </Route>
+      <Route exact path="/search">
+        <Header />
+        <CategoryBar />
+        <ProductIndex />
+          <Footer />
       </Route>
 
     </Switch>

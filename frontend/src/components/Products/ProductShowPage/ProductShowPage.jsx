@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+import { addToCart, fetchAddToCart } from "../../../store/cartItem";
 import { fetchProduct, receiveProduct } from "../../../store/product";
-import Review from "../../Reviews/Reviews";
 import './ProductShowPage.css'
+import { useHistory } from "react-router-dom";
 
-const ProductShow = ({prodcuts}) => {
+const ProductShow = ({products}) => {
 
 const dispatch = useDispatch();
 const { productId } = useParams();
 const product = useSelector(receiveProduct(productId));
 const [count , setCount ] = useState(1);
-
+const user = useSelector(state => state.session.user)
+const history = useHistory();
 
 useEffect(() => {
     dispatch(fetchProduct(productId));
 },[dispatch, productId]);
+
+
 
 if (!product) {
     return null;
@@ -39,6 +43,19 @@ const quantitySelect = [
         );
     };
 });
+
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    const item = {productId: productId, quantity: count}
+    if (user) {
+        dispatch(fetchAddToCart(item));
+    }
+    else {
+        history.push('/login')
+    };
+};
+
 
 
 
@@ -104,7 +121,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                     </div>
                         <div className="prime-delivery-guarantee">FREE delivery <span className="date">Saturday, March 4. </span>Order within <span className='deadline'>7 hrs 58 mins</span></div>
                     <div className="in-stock">In Stock</div>
-                    <div type="submit" className="add-to-cart-form">
+                    <form onSubmit={handleSubmit} className="add-to-cart-form">
                         <div className="quantiy-select">
                             <label className="dropdown-quantity">
                                 <select 
@@ -121,7 +138,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                                     >
                                 </input>
                         </div>
-                    </div>
+                    </form>
                     <div className="buy-now-form">
                         <input 
                             type='submit'

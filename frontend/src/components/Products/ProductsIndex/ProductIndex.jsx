@@ -10,9 +10,14 @@ const ProductIndex = () => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-    // debugger
-    dispatch(fetchProducts())
+      // debugger
+      dispatch(fetchProducts())
     },[dispatch])
+
+    if (!products) {
+      return null
+    }
+    
     return (
         // <div className="all-products-container">
         //     <ul className="all-products">
@@ -45,7 +50,7 @@ const ProductIndex = () => {
               </Link>
                 {/* <p className="product-card__description">{product.description}</p> */}
                 <div className="product-card__price">${product.price.toFixed(2)}</div>
-              {/* <button className="product-card__button">Add to Cart</button> */}
+              <button className="product-card__button">Add to Cart</button>
             </div>
           </li>
         ))}

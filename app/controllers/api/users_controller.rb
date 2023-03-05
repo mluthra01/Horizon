@@ -21,13 +21,3 @@ class Api::UsersController < ApplicationController
   end
 end
 
-
-# optionsSignUpForm = {
-#     method: 'POST',
-#     headers: { 'Content-Type': 'application/json' },
-#     body: JSON.stringify({ 
-#       email: 'howare@gmail.com', 
-#       name: 'hitesh',
-#       password: 'mynameishitesh',
-#     })
-# }

@@ -139,7 +139,7 @@ Superfast Memory 8GB of unified memory makes your entire system speedy and respo
 Stunning Display  With a 13.3” Retina display, images come alive with new levels of realism. Text is sharp and clear, and colors are more vibrant.
 Why Mac  Easy to learn. Easy to set up. Astoundingly powerful. Intuitive. Packed with apps to use right out of the box. Mac is designed to let you work, play, and create like never before.",
     category_id: category_1.id,
-    price: 999.99
+    price: 999.99,
 )
 
 Product.create!(
@@ -267,6 +267,12 @@ Product.create!(name: "Nike Air Max",
     price: 109.99
 )
 
+
+CartItem.create!(
+    user_id: 1,
+    product_id: 1,
+    quantity: 1
+)
 
 
 # # # # Categories

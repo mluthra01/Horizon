@@ -3,12 +3,14 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import session from "./session";
 import products from "./product";
+import cartItems from "./cartItem"
 import { compose } from "redux";
 
 
 const rootReducer = combineReducers({
     session,
-    products
+    products,
+    cartItems
 });
 
 

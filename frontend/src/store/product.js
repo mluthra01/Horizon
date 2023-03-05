@@ -33,7 +33,7 @@ export const receiveProducts = state => {
 };
 
 export const receiveProduct = (productId) => state => {
-    return state.products ? state.products[productId] : 2;
+    return state.products ? state.products[productId] : null;
 };
 
 
@@ -72,6 +72,7 @@ export const searchProducts = (query) => async (dispatch) => {
 
 
 
+
 const productsReducer = (oldState = {}, action) => {
     const nextState = {...oldState}
     // debugger
@@ -84,7 +85,7 @@ const productsReducer = (oldState = {}, action) => {
         nextState[product.id] = product
             return nextState;
         case SET_SEARCH_QUERY:
-            return { ...nextState, searchQuery: action.query };
+            return { ...nextState, searchQuery: action.query}
         case GET_PRODUCTS_BY_CATEGORY:
             return action.products;
         default:
