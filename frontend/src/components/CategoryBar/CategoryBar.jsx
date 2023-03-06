@@ -11,8 +11,8 @@ const CategoryBar = () => {
             <NavLink className='links' to='/products'>All Products</NavLink>
             <NavLink className='links' to='/category/1'>Electronics</NavLink>
             <NavLink className='links' to='/category/2'>Home and Kitchen</NavLink>
-            <NavLink className='links' to='/category/3'>Sports and Outdoors</NavLink>
-            <NavLink className='links' to='/category/4'>Clothing and Accessories</NavLink>
+            <NavLink className='links' to='/category/3'>Beauty</NavLink>
+            <NavLink className='links' to='/category/4'>Sports and Outdoors</NavLink>
             <NavLink className='links' to='/category/5'>Best Sellers</NavLink>
             <a rel="noreferrer" target="_blank" className='links' href="https://www.linkedin.com/in/madhur-luthra-08a53a126/">LinkedIn</a>
             <a rel="noreferrer" target="_blank" className='links' href="https://github.com/mluthra01">GitHub</a>
@@ -21,10 +21,7 @@ const CategoryBar = () => {
 
             </div>
         </div>
+    );
+};
 
-    
-
-    )
-}
-
-export default CategoryBar
+export default CategoryBar;

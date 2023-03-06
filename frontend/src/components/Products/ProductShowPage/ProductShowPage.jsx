@@ -6,7 +6,7 @@ import { fetchProduct, receiveProduct } from "../../../store/product";
 import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
 
-const ProductShow = ({products}) => {
+const ProductShow = () => {
 
 const dispatch = useDispatch();
 const { productId } = useParams();
@@ -70,7 +70,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                 <div className="product-img-container"> 
                 <img 
                     className="product-image-show"
-                    src='/assets/placeholder.webp'
+                    src={product.photoUrl}
                     alt={product.name}
                 ></img>
             </div>

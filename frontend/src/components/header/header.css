@@ -9,6 +9,7 @@
     align-items: center;
     background-color: #131921;
     position: relative;
+    z-index: 2;
 
 }
 /* HORIZON LOGO */
@@ -201,6 +202,7 @@
     z-index: 4;
 }
 
+
 /* RETURN AND ORDERS BUTTON */
 .header-return-and-orders{
     display: flex;
@@ -276,4 +278,66 @@ font-weight: 400;
 .header-logo img
 {
 border: 1px solid transparent; 
+}
+
+
+
+/* CHAT GPT */
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.header-option1 {
+    font-weight: 700;
+}
+
+.header-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+.header-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.header-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.header-dropdown-option1 {
+    font-weight: 700;
+}
+
+.header-dropdown-option2 {
+    margin-left: 5px;
+}
+
+.fa-caret-down,
+.fa-caret-up {
+    margin-left: 5px;
 }

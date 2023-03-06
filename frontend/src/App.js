@@ -10,7 +10,7 @@ import ProductIndex from './components/Products/ProductsIndex/ProductIndex';
 import ProductShow from './components/Products/ProductShowPage/ProductShowPage';
 import CategoryIndex from './components/Category/CategoryIndex';
 import CartItem from './components/CartItems/CartItemsIndex';
-
+import Carousel from './components/Carousel/Carousel';
 import Homepage from './components/Homepage/Homepage';
 
 
@@ -23,7 +23,7 @@ function App() {
       <Route exact path='/'>
         <Header />
         <CategoryBar />
-        {/* <Carousel images={images} /> */}
+        {/* <Carousel  /> */}
         <Homepage />
         <Footer />
       </Route>
