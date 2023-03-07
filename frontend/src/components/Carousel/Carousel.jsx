@@ -6,28 +6,27 @@ import './Carousel.css';
 
 const Carousel = () => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
-          dots: true,
+          infinite: true
+      
         },
       },
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
-          dots: true,
+          infinite: true
+      
         },
       },
       {
@@ -44,28 +43,13 @@ const Carousel = () => {
     <div className="carousel">
       <Slider {...settings}>
         <div>
-          <img src="https://picsum.photos/id/10/800/600" alt="Carousel 1" />
+          <img src="https://horizon-seeds.s3.us-west-1.amazonaws.com/carousel/alexa.jpg" alt="Carousel 1" />
         </div>
         <div>
-          <img src="https://picsum.photos/id/20/800/600" alt="Carousel 2" />
+          <img src="https://horizon-seeds.s3.us-west-1.amazonaws.com/carousel/lacome.jpg" alt="Carousel 2" />
         </div>
         <div>
-          <img src="https://picsum.photos/id/30/800/600" alt="Carousel 3" />
-        </div>
-        <div>
-          <img src="https://picsum.photos/id/40/800/600" alt="Carousel 4" />
-        </div>
-        <div>
-          <img src="https://picsum.photos/id/50/800/600" alt="Carousel 5" />
-        </div>
-        <div>
-          <img src="https://picsum.photos/id/60/800/600" alt="Carousel 6" />
-        </div>
-        <div>
-          <img src="https://picsum.photos/id/70/800/600" alt="Carousel 7" />
-        </div>
-        <div>
-          <img src="https://picsum.photos/id/80/800/600" alt="Carousel 8" />
+          <img src="https://horizon-seeds.s3.us-west-1.amazonaws.com/carousel/primevideo.jpg" alt="Carousel 3" />
         </div>
       </Slider>
     </div>

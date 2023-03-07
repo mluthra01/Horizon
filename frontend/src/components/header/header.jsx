@@ -1,36 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef} from 'react';
 import './header.css';
-import {Link, NavLink, useHistory} from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { fetchProducts, searchProducts } from '../../store/product';
-// import ProductShow from '../Products/ProductShowPage/ProductShowPage';
 
 
 const Header = () => {
 
-  const user = useSelector(state => state.session.user)
-  // const products = useSelector(state => state.products)
+  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  // const history = useHistory();
-  const cartItems = useSelector(state => state.cartItems)
-  // const [searchResults, setSearchResults] = useState([]);
-  // console.log(Object.values(cartItems))
-    useEffect(() => {
-      dispatch(fetchProducts())
-    },[dispatch])
+  const cartItems = useSelector(state => state.cartItems);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        inputRef.current.style.outline = null;
+        inputRef.current.style.boxShadow = null;
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
 
     const handleSearch =  (e) => {
       e.preventDefault();
       (dispatch(searchProducts(searchQuery)));
-
     };
-
-
     
     let total = 0;
     Object.keys(cartItems).map(cartItemId => {
@@ -41,9 +48,22 @@ const Header = () => {
         total = 0
       }
       return total
-    })
+    });
 
+const handleClick = () => {
+  const headerSearch = document.querySelector('.header-search')
+  headerSearch.style.outline = "none";
+  headerSearch.style.boxShadow = "0 0 0 2px #f90, 0 0 0 3px rgb(255 153 0 / 50%)"
+};
 
+  const demoLogin = () => {
+        const demoUser = {
+        email: "demo@user.io",
+        password: "password",
+        };
+    dispatch(sessionActions.login(demoUser));
+
+    };
 
     
 return (
@@ -69,7 +89,7 @@ return (
 
 
     {/* SEARCH BAR */}
-        <form className="header-search" onSubmit={handleSearch}>
+        <form className="header-search" ref={inputRef} onSubmit={handleSearch} onClick={handleClick}>
               <input 
                 type="text"
                 className="header-search-input" 
@@ -82,12 +102,12 @@ return (
   
     {/* PROFILE BUTTON */}
       <div className="header-profile">
-        <div className="header-user-content">
-              <Link to={'/login'} >
-                  <div className="header-greeting" style={{textDecoration: 'none'}}>
+        <div className="header-user-content" onMouseEnter={() => setIsOpen(!isOpen)} onMouseLeave={() => setIsOpen(isOpen)}>
+              <NavLink to={'/login'} >
+                  <div className="header-greeting" >
                     Hello, {user ? user.name.split(" ")[0] : 'sign in'}
                   </div>
-              </Link>
+              </NavLink>
       
                   <div type='submit' className="signIn-signOut-button">
                           Accounts and Lists
@@ -95,9 +115,28 @@ return (
                   </div>  
                   
         </div>
+        {!user && <div className="dropdown-logout">
+                <div className="dropdown__toggle"  >
+                <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i>
+                </div>
+              {isOpen && (
+                <div className="dropdown__menu">
+                    <div className='your-account'></div>
+                  <NavLink style={{textDecoration: "none" ,color: "black"}} className='dropdown-links dropdown-signin-button' to="/login">Sign in</NavLink>
+                  <div onClick={demoLogin} className="dropdown-links dropdown-demo-login-button" > Demo login</div>
+                <div className="dropdown-signup-label">
+                        New customer?{" "}
+                        <NavLink className="dropdown-signup-link" to="/signup">
+                          Start here.
+                        </NavLink>
+                      </div>
+                </div>
+              )}
+          </div>}
 
+                  
         {user && <div className="dropdown">
-                <div className="dropdown__toggle" onMouseEnter={() => setIsOpen(!isOpen)} onMouseLeave={() => setIsOpen(isOpen)} >
+                <div className="dropdown__toggle"  >
                 <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i>
                 </div>
               {isOpen && (
@@ -108,9 +147,8 @@ return (
                   <NavLink className='dropdown-links' to='/' onClick={() => dispatch(sessionActions.logout())}>Sign out</NavLink>
                 </div>
               )}
-            
+          </div>}
 
-        </div>}
         <div className='dropdown-up-arrow'></div>
             {/* <div className='background'></div> */}
       </div>
@@ -124,12 +162,10 @@ return (
 
     {/* CART-ITEMS */}
     
-    <Link to={user ? '/cart' : '/login'}>
+    <NavLink style={{textDecoration: "none"}} to={!user ? '/empty' : "/cart"}>
       <div className="header-cart-items">
           <div className='header-cart-count'>
             {total}
-            {/* {getCartItemLength} */}
-                {/* {cartItem ? getCartItemLength(cartItem) : 0} */}
           </div>
           <div className="header-cart-img">
               <img src='/assets/cart.png' alt='cart_logo'/>
@@ -138,7 +174,7 @@ return (
               Cart
           </div>
       </div>
-      </Link>
+      </NavLink>
           
     
 </div>

@@ -19,8 +19,6 @@ useEffect(() => {
     dispatch(fetchProduct(productId));
 },[dispatch, productId]);
 
-
-
 if (!product) {
     return null;
 };
@@ -44,7 +42,6 @@ const quantitySelect = [
     };
 });
 
-
 const handleSubmit = (e) => {
     e.preventDefault();
     const item = {productId: productId, quantity: count}
@@ -55,10 +52,6 @@ const handleSubmit = (e) => {
         history.push('/login')
     };
 };
-
-
-
-
 
 const price = parseFloat(product.price).toFixed(2)
 const [wholePrice, fractionPrice] = price.split('.')

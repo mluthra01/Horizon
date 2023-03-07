@@ -9,9 +9,11 @@ import './reset.css'
 import ProductIndex from './components/Products/ProductsIndex/ProductIndex';
 import ProductShow from './components/Products/ProductShowPage/ProductShowPage';
 import CategoryIndex from './components/Category/CategoryIndex';
-import CartItem from './components/CartItems/CartItemsIndex';
-import Carousel from './components/Carousel/Carousel';
+import CartIndex from './components/CartItems/CartIndex';
 import Homepage from './components/Homepage/Homepage';
+import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
+
+
 
 
 
@@ -23,7 +25,6 @@ function App() {
       <Route exact path='/'>
         <Header />
         <CategoryBar />
-        {/* <Carousel  /> */}
         <Homepage />
         <Footer />
       </Route>
@@ -32,6 +33,12 @@ function App() {
       </Route>
       <Route exact path='/signup'>
         <SignUpFormPage />
+      </Route>
+      <Route exact path="/empty">
+          <Header />
+          <CategoryBar />
+          <CartEmpty />
+          <Footer />
       </Route>
       <Route exact path='/products'>
         <Header />
@@ -55,15 +62,16 @@ function App() {
       <Route exact path="/cart">
           <Header />
           <CategoryBar />
-          <CartItem />
+          <CartIndex />
           <Footer />
       </Route>
-      <Route exact path="/search">
+      <Route exact path="/:search">
         <Header />
         <CategoryBar />
         <ProductIndex />
-          <Footer />
+        <Footer />
       </Route>
+
 
     </Switch>
     </>

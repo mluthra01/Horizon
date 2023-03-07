@@ -1,24 +1,8 @@
 
 import './Homepage.css'
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { recieveProductsByCategory } from '../../store/category';
-import { useEffect } from 'react';
-import { fetchProductsByCategory } from '../../store/category';
-import { useDispatch } from 'react-redux';
-import Cards from './Cards/Cards';
 import Carousel from '../Carousel/Carousel';
-
-
-
-// here i will make 4 cards for each of the catrgory and the 
-// and the best sellers(hot items) can go underneath
-
 const Homepage = () => {
-
-const products = useSelector(recieveProductsByCategory());
-const dispatch = useDispatch();
-
 return (
         <div className='homepage-container'>
             <div className='carousel'>

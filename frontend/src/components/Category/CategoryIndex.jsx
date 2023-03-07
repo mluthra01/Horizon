@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProductsByCategory, recieveProductsByCategory } from '../../store/category';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './CategoryIndex.css'
 
 const CategoryIndex = () => {
@@ -37,25 +37,38 @@ useEffect(() => {
     if (!products) return null;
     
     return (    
+
+      // <div className="productIndex">
+      //     <h2 className="product-category-title">All Products</h2>
+      //   {products.map(product => (
+      //     <ProductItem product={product } />
+      //   ))}
+      //   </div>
     <div className="all-products-container">
-            <h2 className="product-category-title">{categoryName}</h2>
-            <ul className="all-products">
-                {products.map(product => (
-                <li className="product-card" key={product.id}>
-                    <div className="product-card-image">
-                        <img src={product.photoUrl} alt={product.name} />
-                    </div>
-                    <div className="product-card-info">
-                      <Link to={`/products/${product.id}`} >
-            <h3 className="product-card-name">{product.name}</h3>
-              </Link>
-                {/* <p className="product-card__description">{product.description}</p> */}
-                <div className="product-card-price">${product.price.toFixed(2)}</div>
-              {/* <button className="product-card__button">Add to Cart</button> */}
+        <div className="product-category-title">
+          {categoryName}
+        </div>
+        <ul className="all-products">
+          {products.map(product => (
+            <li className="product-card" key={product.id}>
+              <NavLink to={`/products/${product.id}`} >
+                <div className="product-card-image">
+                  <img src={product.photoUrl} alt={product.name} />
+                </div>
+                <div className="product-card-info">
+                <div className="product-card-name">
+                  {product.name.length > 50 ?
+                  product.name.slice(0, product.name.lastIndexOf(' ', 50)) + "..."
+                  : product.name }
+                </div>
+                <div className="product-card-price">
+                  ${product.price.toFixed(2)}
+                </div>
             </div>
+              </NavLink>
           </li>
-        ))}
-      </ul>
+          ))};
+        </ul>
     </div>
   
     );

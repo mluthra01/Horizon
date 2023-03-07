@@ -13,14 +13,14 @@ export const addToCart = (cartItem) => {
     };
 };
 
-export const getCartItems = (cartItems) => {
+export const getCartItems = (payload) => {
     return {    
         type: GET_CART_ITEMS,
-        cartItems
+        payload
     };
 };
 
-export const deleteCartItem  = (cartItemId ) => {
+export const deleteCartItem  = (cartItemId) => {
     return {
         type: DELETE_CART_ITEM,
         cartItemId
@@ -104,7 +104,7 @@ const cartItemReducer = (oldState = {}, action) => {
         case ADD_TO_CART:
         return nextState[action.cartItem.id] = action.cartItem;
         case GET_CART_ITEMS:
-            return action.cartItems;
+            return action.payload.cartItems;
         case UPDATE_CART_ITEM:
             return nextState[action.cartItem.id] = action.cartItem;
         case DELETE_CART_ITEM:
