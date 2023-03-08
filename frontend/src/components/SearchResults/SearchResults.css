@@ -1,0 +1,25 @@
+.search-results-heading {
+    display: block;
+    font-size: 30px;
+    font-weight: 300;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.search-query {
+    font-size: 24px;
+    color: #c45500 !important;
+    font-weight: 600;
+}
+
+.no-result-found-container {
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.no-products {
+    font-size: 45px;
+
+}

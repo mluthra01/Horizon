@@ -38,11 +38,13 @@ class Api::CartItemsController < ApplicationController
 
         render json: ['lol']
         end
+        # @cart = CartItem.find_by(id: params[:id])
+        # @cart.destroy_all
+        # render json: ["deleted"]
     end
 
 
     def update
-        # @user = current_user
         @cart_item = CartItem.find_by(id: params[:id])
             if @cart_item.update(cart_item_params)
                 render :show
@@ -52,10 +54,9 @@ class Api::CartItemsController < ApplicationController
     end
 
     def destroy
-        @cart_item = CartItem.find_by(id: params[:id])
-            if @cart_item && @cart_item.delete
-                render :show
-            end
+        @cart = CartItem.find_by(id: params[:id])
+        @cart.destroy
+        render json: ["deleted"]
     end
 
     private

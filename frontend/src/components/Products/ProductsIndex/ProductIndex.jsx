@@ -1,17 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { fetchProducts, receiveProducts } from "../../../store/product"
+import { fetchProducts, receiveProducts, searchProducts } from "../../../store/product"
 import './ProductIndex.css'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductItem from "./ProductItem/ProductItem";
 const ProductIndex = () => {
 
     const products = useSelector(receiveProducts);
     const dispatch = useDispatch();
+    const { search } = useParams();
     
     useEffect(() => {
       dispatch(fetchProducts())
     },[dispatch])
+
+    // useEffect(() => {
+    //   dispatch(searchProducts(search))
+    // },[dispatch, search])
 
     if (!products) {
       return null

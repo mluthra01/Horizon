@@ -20,10 +20,11 @@ export const getCartItems = (payload) => {
     };
 };
 
-export const deleteCartItem  = (cartItemId) => {
+export const deleteCartItem  = (productId) => {
     return {
         type: DELETE_CART_ITEM,
-        cartItemId
+        productId: productId 
+        
     };
 };
 
@@ -45,12 +46,11 @@ export const clearCart = () => {
 export const clearCartItems = () => async (dispatch) => {
     const response = await csrfFetch("/api/cart_items", {
     method: "DELETE"
-})
+    });
     if (response.ok) {
-
         dispatch(clearCart())
-    }
-    }
+    };
+};
 
 
 export const fetchCartItems = () => async dispatch => {
@@ -75,7 +75,7 @@ export const fetchAddToCart = (cartItem) => async dispatch => {
 };
 
 export const fetchUpdateCart = (cartItem) => async dispatch => {
-    const response = await csrfFetch(`api/cart_items/`, {
+    const response = await csrfFetch(`/api/cart_items/`, {
         method: 'patch',
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({cartItem})
@@ -86,13 +86,13 @@ export const fetchUpdateCart = (cartItem) => async dispatch => {
     };
 };
 
-export const fetchDeleteCartItem = (cartItemId) => async dispatch => {
-    const response = await csrfFetch(`api/cart_items/${cartItemId}`, {
+export const fetchDeleteCartItem = (productId) => async dispatch => {
+    const response = await csrfFetch(`/api/cart_items/${productId}`, {
         method: 'Delete'
     });
 
         if (response.ok) {
-            dispatch(deleteCartItem(cartItemId))
+            dispatch(deleteCartItem(productId))
         };
 
 };
@@ -104,12 +104,13 @@ const cartItemReducer = (oldState = {}, action) => {
         case ADD_TO_CART:
         return nextState[action.cartItem.id] = action.cartItem;
         case GET_CART_ITEMS:
-            return action.payload.cartItems;
+        return action.payload.cartItems;
         case UPDATE_CART_ITEM:
             return nextState[action.cartItem.id] = action.cartItem;
         case DELETE_CART_ITEM:
-        const cartItemId = action.cartItemId
-        delete nextState[cartItemId]
+        // delete nextState[action.cartItem.productId];
+        // return nextState;
+        delete nextState[action.productId];
         return nextState;
         case CLEAR_CART:
             return {};

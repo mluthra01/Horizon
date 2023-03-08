@@ -5,6 +5,8 @@ import { addToCart, fetchAddToCart } from "../../../store/cartItem";
 import { fetchProduct, receiveProduct } from "../../../store/product";
 import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
+import Review from "../../Reviews/Reviews";
+
 
 const ProductShow = () => {
 
@@ -29,14 +31,14 @@ const quantitySelect = [
     "0", "1", "2", "3", "4", "5",
     "6", "7", "8", "9", "10",
     "11", "12", "13", "14", "15",
-    "16", "17", "18", "19", "20"].map((quantity) => {
-    if (quantity === "0") {
-        return <option hidden key={quantity}>{`Qty: ${count}`}</option>;
+    "16", "17", "18", "19", "20"].map((quan) => {
+    if (quan === "0") {
+        return <option hidden key={quan}>{`Qty: ${count}`}</option>;
         } 
     else {
         return (
-        <option value={quantity} key={quantity}>
-            {quantity}
+        <option value={quan} key={quan}>
+            {quan}
         </option>
         );
     };
@@ -159,7 +161,7 @@ const [wholePrice, fractionPrice] = price.split('.')
 
             {/* REVIEWS */}
             <div className="product-review-section">
-
+                <Review />
             </div>
         </div>
     )

@@ -51,7 +51,7 @@ useEffect(() => {
         <ul className="all-products">
           {products.map(product => (
             <li className="product-card" key={product.id}>
-              <NavLink to={`/products/${product.id}`} >
+              <NavLink style={{textDecoration: "none"}} to={`/products/${product.id}`} >
                 <div className="product-card-image">
                   <img src={product.photoUrl} alt={product.name} />
                 </div>

@@ -12,6 +12,7 @@ import CategoryIndex from './components/Category/CategoryIndex';
 import CartIndex from './components/CartItems/CartIndex';
 import Homepage from './components/Homepage/Homepage';
 import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
+import SearchResults from './components/SearchResults/SearchResults';
 
 
 
@@ -65,10 +66,10 @@ function App() {
           <CartIndex />
           <Footer />
       </Route>
-      <Route exact path="/:search">
+      <Route exact path="/search/:query">
         <Header />
         <CategoryBar />
-        <ProductIndex />
+        <SearchResults />
         <Footer />
       </Route>
 

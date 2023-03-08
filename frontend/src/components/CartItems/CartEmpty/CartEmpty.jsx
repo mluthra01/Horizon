@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import './CartEmpty.css'
 
 const CartEmpty = () => {
 
+const user = useSelector( state => state.session.user)
 return (
     <div className='cart-page-container'>
         <div className="empty-cart-container">
@@ -21,6 +23,7 @@ return (
                 Shop all Products
             </div >
             </NavLink>
+        { !user && (
             <div className='route-buttons'>
             <NavLink to='/login'  style={{textDecoration: "none"}} >
             <div className="cart-signIn-button">
@@ -33,6 +36,8 @@ return (
             </div>
             </NavLink>
             </div>
+        )}
+
         </div>
         </div>
     </div>
