@@ -14,12 +14,12 @@ const SearchResults = () => {
     // }
 
     return (
-    <div>
+    <div className='.all-of-products-container'>
         <div className='search-results-heading'>Search results for <span className='search-query'>"{query}"</span></div>
         < hr />
-        <ul>
+        <ul className='all-of-the-products'>
         {products.map(product => (
-        <li key={product.id}>  <ProductItem product={product} /></li>
+        <li classname="product-cards" key={product.id}>  <ProductItem product={product} /></li>
             ))}
         </ul>
         {products.length < 1 && (

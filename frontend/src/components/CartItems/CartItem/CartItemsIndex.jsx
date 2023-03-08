@@ -1,12 +1,7 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, fetchCartItems, updateCartItem } from "../../../store/cartItem";
-import { fetchProducts } from "../../../store/product";
-import { receiveProducts } from "../../../store/product";
-import CartEmpty from "../CartEmpty/CartEmpty";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { fetchDeleteCartItem } from "../../../store/cartItem";
+import { useState, useEffect } from "react";
+import { fetchDeleteCartItem, fetchUpdateCart } from "../../../store/cartItem";
 import './CartItem.css'
 
 
@@ -16,27 +11,28 @@ const {id, name, photoUrl, price, cartItemId, quantity } = product
 const [count, setCount] = useState(quantity);
 const dispatch = useDispatch();
 
+useEffect(() => {
+    dispatch(fetchUpdateCart(cartItemId, count))
+},[ cartItemId, count])
+
 const quantitySelect = [
     "0", "1", "2", "3", "4", "5",
     "6", "7", "8", "9", "10",
     "11", "12", "13", "14", "15",
-    "16", "17", "18", "19", "20"].map((quanity) => {
-    if (quanity === "0") {
-        return <option hidden key={quanity}>{`Qty: ${count}`}</option>;
+    "16", "17", "18", "19", "20"].map((quantity) => {
+    if (quantity === "0") {
+        return <option hidden key={quantity}>{`Qty: ${count}`}</option>;
         } 
     else {
         return (
-        <option value={quanity} key={quanity}>
-            {quanity}
+        <option value={quantity} key={quantity}>
+            {quantity}
         </option>
         );
     };
-})
-
+});
 
     return (
-        // <>
-        // {products.length > 0 ?
         <div className="cart-product-container">
             <div className="cart-product-img-container">
                 <NavLink to={`/products/${id}`} target="_blank">
@@ -75,23 +71,7 @@ const quantitySelect = [
                 </div>
             </div>
                     <div className="cart-product-price">${price.toFixed(2)}</div>
-                {/* <ul>
-                {products.map(product => (
-                    <li key={product.id}>{product.name} </li>
-                ))}
-                </ul>
-                <hr />
-            
-                <div className="quantity">5</div>
-                <button onClick={handleClick()}>Delete</button> */}
 </div>
-        //     : null }
-        //     <>
-        //     {products.length < 1 ? 
-        //     <CartEmpty /> : null }
-        //     </>
-
-        // </>
     );
 };
 

@@ -68,17 +68,18 @@ export const fetchAddToCart = (cartItem) => async dispatch => {
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify(cartItem)
     });
+
         if (response.ok) {
             const cartItem = await response.json();
             dispatch(addToCart(cartItem));
         };
 };
 
-export const fetchUpdateCart = (cartItem) => async dispatch => {
-    const response = await csrfFetch(`/api/cart_items/`, {
-        method: 'patch',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify({cartItem})
+export const fetchUpdateCart = (cartItemId, count) => async dispatch => {
+    const response = await csrfFetch(`/api/cart_items/${cartItemId}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({quantity: count})
     });
     if (response.ok) {
         const cartItem = await response.json();
@@ -108,8 +109,6 @@ const cartItemReducer = (oldState = {}, action) => {
         case UPDATE_CART_ITEM:
             return nextState[action.cartItem.id] = action.cartItem;
         case DELETE_CART_ITEM:
-        // delete nextState[action.cartItem.productId];
-        // return nextState;
         delete nextState[action.productId];
         return nextState;
         case CLEAR_CART:

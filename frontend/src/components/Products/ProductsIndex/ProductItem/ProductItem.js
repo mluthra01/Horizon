@@ -9,7 +9,6 @@ const ProductItem = ({product}) => {
         <div className="all-products-container">
                     <NavLink style={{textDecoration: "none"}} to={`/products/${product.id}`} >
             <ul className="all-products">
-                {/* {products.map(product => ( */}
                 <li className="product-card" key={product.id}>
                     <div className="product-card-image">
                         <img src={product.photoUrl} alt={product.name} />
@@ -22,10 +21,8 @@ const ProductItem = ({product}) => {
                 }
                 </h3>
                 <div className="product-card-price">${product.price.toFixed(2)}</div>
-              {/* <button className="product-card-button">Add to Cart</button> */}
             </div>
         </li>
-        {/* ))} */}
     </ul>
             </NavLink>
     </div>

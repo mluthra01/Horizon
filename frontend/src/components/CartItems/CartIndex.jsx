@@ -1,37 +1,56 @@
 import CartItem from "./CartItem/CartItemsIndex"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartItems } from "../../store/cartItem";
+import { clearCart, clearCartItems, getCartItems } from "../../store/cartItem";
 import { fetchCartItems } from "../../store/cartItem";
 import { fetchProducts, receiveProducts } from "../../store/product";
+import { useHistory } from "react-router-dom";
 import './CartIndex.css'
 import CartEmpty from "./CartEmpty/CartEmpty";
 
 const CartIndex = () => {
 const dispatch = useDispatch();
+const history = useHistory();
 const products = useSelector(receiveProducts);
+const [subtotal, setSubtotal ] = useState(0.0);
 const cartItems = useSelector(state => state.cartItems);
 const carts = Object.values(cartItems)
-const listCart = products.map((product) => (
-    <>
+const allCartItems = products.map((product) => (
+    <div key={product}>
         <CartItem key={product.id} product={product} />
         <hr />
-    </>
-))
-
-const calculateCartSize = () => {
-    let size = 0;
-    carts.map(cart => {
-        size += cart.quantity
-    });
-    return size
-}
-
+    </div>
+    ));
     useEffect(() => {
-        
-    dispatch(fetchCartItems())
+        calculateSubTotal();
+    });
 
+        useEffect(() => {
+        dispatch(fetchCartItems())
     },[dispatch]);
+    
+    const calculateCartSize = () => {
+        let size = 0;
+        carts.map(cart => {
+            size += cart.quantity
+        });
+        return size
+    }
+
+const calculateSubTotal = () => {
+    let subTotal = 0;
+    products.forEach(product => {
+        subTotal += product.quantity * product.price
+    });
+    setSubtotal(Math.round(subTotal * 100) / 100 )
+};
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(clearCartItems());
+    history.push('/checkout')
+};
+
 
     if (!carts) return null;
     return (
@@ -42,17 +61,19 @@ const calculateCartSize = () => {
             <div className="cart-heading">Shopping Cart</div>
             <div className="cart-price-heading">Price</div>
             <hr className="top-border" />
-            <div className="card-item-products">{listCart}</div>
+            <div className="card-item-products">{allCartItems}</div>
             <div className="sub-total-container">
-                Subtotal
-                    <span className="sub-total-amt">$</span>
+                Subtotal ({calculateCartSize()}{" "}
+                {calculateCartSize() > 1 ? "items" : "item"}):&nbsp;
+                    <span className="sub-total-amt">${subtotal}</span>
             </div>
             <div className="checkout-container">
                 <div className="sub-total-container">
-                    Subtotal
-                    <span className="sub-total-amt">$</span>
+                Subtotal ({calculateCartSize()}{" "}
+                {calculateCartSize() > 1 ? "items" : "item"}):&nbsp;
+                    <span className="sub-total-amt">${subtotal}</span>
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}> 
                     <input 
                         type='submit'
                         className="checkout-btn"

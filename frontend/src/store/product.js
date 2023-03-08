@@ -65,13 +65,11 @@ export const searchProducts = (query) => async (dispatch) => {
         if (response.ok) {
         const products = await response.json();
             dispatch(getProducts(products));
-            // dispatch(setSearchQuery(query));
     };
 };
 
 const productsReducer = (oldState = {}, action) => {
     const nextState = {...oldState}
-    // debugger
     switch(action.type) {
         case GET_PRODUCTS:
         const products = action.products;
@@ -80,8 +78,6 @@ const productsReducer = (oldState = {}, action) => {
         const product =  action.product
         nextState[product.id] = product
             return nextState;
-        // case SET_SEARCH_QUERY:
-        //     return { ...nextState, searchQuery: action.query}
         case GET_PRODUCTS_BY_CATEGORY:
             return action.products;
         case GET_CART_ITEMS:
@@ -94,4 +90,4 @@ const productsReducer = (oldState = {}, action) => {
     }
 }
 
-export default productsReducer
+export default productsReducer;

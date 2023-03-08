@@ -8,13 +8,12 @@
 .cart-product-img-container {
     margin-left: 20px;
     width: 15%;
-    max-height: 5%;
-    max-height: 25%;
+    max-height: 20%;
     text-align: center;
 }
 
 .cart-product-content-container {
-    width: 80%;
+    width: 60%;
 }
 
 .cart-eligible {

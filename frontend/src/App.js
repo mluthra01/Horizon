@@ -13,9 +13,7 @@ import CartIndex from './components/CartItems/CartIndex';
 import Homepage from './components/Homepage/Homepage';
 import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
 import SearchResults from './components/SearchResults/SearchResults';
-
-
-
+import Checkout from './components/CheckoutPage/Checkout';
 
 
 function App() {
@@ -72,8 +70,9 @@ function App() {
         <SearchResults />
         <Footer />
       </Route>
-
-
+      <Route exact path="/checkout">
+        <Checkout />
+      </Route>
     </Switch>
     </>
 

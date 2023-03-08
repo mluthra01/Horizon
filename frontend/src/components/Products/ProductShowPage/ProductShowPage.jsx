@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
-import { addToCart, fetchAddToCart } from "../../../store/cartItem";
+import { useParams } from "react-router-dom";
+import { fetchAddToCart } from "../../../store/cartItem";
 import { fetchProduct, receiveProduct } from "../../../store/product";
 import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
@@ -31,18 +31,26 @@ const quantitySelect = [
     "0", "1", "2", "3", "4", "5",
     "6", "7", "8", "9", "10",
     "11", "12", "13", "14", "15",
-    "16", "17", "18", "19", "20"].map((quan) => {
-    if (quan === "0") {
-        return <option hidden key={quan}>{`Qty: ${count}`}</option>;
+    "16", "17", "18", "19", "20"].map((quanity) => {
+    if (quanity === "0") {
+        return <option hidden key={quanity}>{`Qty: ${count}`}</option>;
         } 
     else {
         return (
-        <option value={quan} key={quan}>
-            {quan}
+        <option value={quanity} key={quanity}>
+            {quanity}
         </option>
         );
     };
 });
+const deliveryDate = new Date();
+deliveryDate.setDate(deliveryDate.getDate() + 2); 
+const deliveryDay = deliveryDate.toLocaleDateString('en-US', { weekday: 'long' }); 
+const deliveryTime = deliveryDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); 
+
+const deliveryMessage = `FREE delivery ${deliveryDay}, ${deliveryDate.toLocaleDateString()}.
+Order within ${Math.floor(Math.random() * 12) + 1} hrs ${Math.floor(Math.random() * 60)} min`;
+
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,7 +102,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                     <div className="description-heading">About this item</div>
                     <ul className="description-list">
                         {description.map(item =>  
-                        <li className="description-content">{item + '.'}</li>
+                        <li className="description-content" key={item}>{item + '.'}</li>
                     )}
                     </ul>
                 
@@ -114,7 +122,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                         <img src='/assets/prime.png' />
                         <div className="free-returns">FREE Returns</div>
                     </div>
-                        <div className="prime-delivery-guarantee">FREE delivery <span className="date">Saturday, March 4. </span>Order within <span className='deadline'>7 hrs 58 mins</span></div>
+                        <div className="prime-delivery-guarantee">FREE delivery <span className="date">{`${deliveryDay}, ${deliveryDate.toLocaleDateString()}.`} </span>Order within <span className='deadline'>{``}</span></div>
                     <div className="in-stock">In Stock</div>
                     <form onSubmit={handleSubmit} className="add-to-cart-form">
                         <div className="quantiy-select">

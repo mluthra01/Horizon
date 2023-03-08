@@ -6,7 +6,7 @@ import * as sessionActions from '../../store/session'
 import { useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { fetchProducts, searchProducts } from '../../store/product';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import SearchResults from '../SearchResults/SearchResults';
 import { fetchCartItems, clearCart, getCartItems } from '../../store/cartItem';
 
@@ -14,37 +14,37 @@ const Header = () => {
 
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const history = useHistory();
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const  [isDropdownOpen, setIsDropdownOpen] = useState(false);;
+  const inputRef = useRef(null);
   const cartItems = useSelector(state => state.cartItems);
-  const  [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const history = useHistory();
-
+  const quantities = Object.values(cartItems);
+  const totalQuantity = quantities.reduce((sum, item) => sum += item.quantity, 0);
 
   const handleMouseEnter = () => {
     setIsDropdownOpen(true);
-<div className='background'></div>
   };
-
 
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
   };
 
-  const inputRef = useRef(null);
+const background = isDropdownOpen ? <div className='background'></div> : null;
 
 
   useEffect(() => {
     if (user) {
       dispatch(fetchCartItems());
     }
-  },[dispatch, user]);
+  },[dispatch, user, totalQuantity]);
 
-
-const handleLogout = () => {
-  dispatch(sessionActions.logout());
-    dispatch(clearCart());
-}
+  const handleLogout = () => {
+    dispatch(sessionActions.logout());
+      dispatch(clearCart());
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -70,18 +70,6 @@ const handleLogout = () => {
     }
     };
 
-
-    
-    let total = 0;
-    Object.keys(cartItems).map(cartItemId => {
-      if (user && user.id === cartItems[cartItemId].userId) {
-        total += cartItems[cartItemId].quantity;
-      }
-      else {
-        total = 0
-      }
-      return total
-    });
 
 const handleClick = () => {
   const headerSearch = document.querySelector('.header-search')
@@ -152,7 +140,7 @@ return (
         </div>
         {!user  && <div className="dropdown-logout">
                 <div className="dropdown__toggle"  >
-                <i hidden className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i>
+                {/* <i hidden className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i> */}
                 </div>
               {isDropdownOpen && (
                 <div className="dropdown__menu">
@@ -172,21 +160,20 @@ return (
                   
         {user && <div className="dropdown">
                 <div className="dropdown__toggle"  >
-                <i className={`fas fa-chevron-${isDropdownOpen ? 'up' : 'down'}`}></i>
+                {/* <i className={`fas fa-chevron-${isDropdownOpen ? 'up' : 'down'}`}></i> */}
                 </div>
               {isDropdownOpen && (
                 <div className="dropdown__menu">
                     <div className='your-account'>Your Account</div>
                   <NavLink className='dropdown-links' to="/addresses">Manage addresses</NavLink>
                   <NavLink className='dropdown-links' to="/orders">Manage orders</NavLink>
-                  <NavLink className='dropdown-links' to='/' onClick={handleLogout}>Sign out</NavLink>
+                  <NavLink className='dropdown-links' to={(pathname === '/cart' ? '/cart' : '/')} onClick={handleLogout}>Sign out</NavLink>
                 </div>
               )}
           </div>}
 
-        <div className='dropdown-up-arrow'></div>
-              {/* {isDropdownOpen ? (<div className='background'></div>)
-              : (<div className=''></div>)} */}
+                {isDropdownOpen && <div className='dropdown-up-arrow'></div>}
+                <div>{background}</div>
       </div>
 
     {/* RETURNS AND ORDERS */}
@@ -200,8 +187,8 @@ return (
     
     <NavLink style={{textDecoration: "none"}} to={!user ? '/empty' : "/cart"}>
       <div className="header-cart-items">
-          <div className='header-cart-count'>
-            {total}
+          <div className={ totalQuantity < 10 ? 'header-cart-count': 'large-count'}>
+            {totalQuantity}
           </div>
           <div className="header-cart-img">
               <img src='/assets/cart.png' alt='cart_logo'/>

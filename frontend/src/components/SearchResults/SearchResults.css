@@ -12,13 +12,6 @@
     font-weight: 600;
 }
 
-.no-result-found-container {
-display: flex;
-justify-content: center;
-align-items: center;
-
-}
-
 .no-products {
     font-size: 45px;
 

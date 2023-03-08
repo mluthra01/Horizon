@@ -37,13 +37,6 @@ useEffect(() => {
     if (!products) return null;
     
     return (    
-
-      // <div className="productIndex">
-      //     <h2 className="product-category-title">All Products</h2>
-      //   {products.map(product => (
-      //     <ProductItem product={product } />
-      //   ))}
-      //   </div>
     <div className="all-products-container">
         <div className="product-category-title">
           {categoryName}

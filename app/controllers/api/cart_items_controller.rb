@@ -45,6 +45,7 @@ class Api::CartItemsController < ApplicationController
 
 
     def update
+        @user = current_user
         @cart_item = CartItem.find_by(id: params[:id])
             if @cart_item.update(cart_item_params)
                 render :show
