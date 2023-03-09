@@ -14,6 +14,8 @@ import Homepage from './components/Homepage/Homepage';
 import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
 import SearchResults from './components/SearchResults/SearchResults';
 import Checkout from './components/CheckoutPage/Checkout';
+import ReviewCreateForm from './components/ReviewForms/ReviewCreateForm/ReviewCreateForm';
+import ReviewEditForm from './components/ReviewForms/ReviewEditForm/ReviewEditForm';
 
 
 function App() {
@@ -72,6 +74,18 @@ function App() {
       </Route>
       <Route exact path="/checkout">
         <Checkout />
+      </Route>
+      <Route exact path="/products/:productId/review">
+        <Header />
+        <CategoryBar />
+        <ReviewCreateForm />
+        <Footer />
+      </Route>
+      <Route exact path="/products/:productId/review/:reviewId/edit">
+        <Header />
+        <CategoryBar />
+        <ReviewEditForm />
+        <Footer />
       </Route>
     </Switch>
     </>

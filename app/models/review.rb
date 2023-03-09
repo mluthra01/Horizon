@@ -2,13 +2,14 @@
 #
 # Table name: reviews
 #
-#  id          :bigint           not null, primary key
-#  reviewer_id :bigint           not null
-#  product_id  :bigint           not null
-#  body        :text             not null
-#  rating      :integer          not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id         :bigint           not null, primary key
+#  user_id    :bigint           not null
+#  product_id :bigint           not null
+#  body       :text             not null
+#  rating     :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  headline   :string           not null
 #
 class Review < ApplicationRecord
 
@@ -22,8 +23,8 @@ class Review < ApplicationRecord
             }
 
 
-    belongs_to :reviewer,
-        foreign_key: :reviewer_id,
+    belongs_to :user,
+        foreign_key: :user_id,
         class_name: :User
 
     belongs_to :product,

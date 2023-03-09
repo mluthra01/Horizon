@@ -265,3 +265,9 @@ line-height: 24px;
 .product-review-section {
     margin-top: 100px;
 }
+
+.ratings-length {
+    font-size: 14px;
+    line-height: 20px;
+    color: #007185;
+}

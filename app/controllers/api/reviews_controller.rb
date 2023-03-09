@@ -1,5 +1,5 @@
 class Api::ReviewsController < ApplicationController
-
+wrap_parameters include: Review.attribute_names + ['userId', 'productId']
     def show
         @review = Review.find_by(id: params[:id])
         render :show
@@ -42,7 +42,7 @@ class Api::ReviewsController < ApplicationController
     private
 
     def review_params
-        params.permit(:review).require(:headline, :body, :rating)
+        params.require(:review).permit(:user_id, :product_id, :headline, :body, :rating)
     end
     
 end

@@ -5,6 +5,7 @@ export const GET_CART_ITEMS = 'cartItems/get_cart_items'
 export const UPDATE_CART_ITEM = 'cartItems/update_cart_item'
 export const DELETE_CART_ITEM = 'cartItems/delete_cart_item'
 export const CLEAR_CART = 'cartItems/clear_cart'
+export const GET_QUANTITY = 'cartItems/get_quantity'
 
 export const addToCart = (cartItem) => {
     return {
@@ -19,6 +20,13 @@ export const getCartItems = (payload) => {
         payload
     };
 };
+
+export const getQuantity = (quantity) => {
+    return {
+        type: GET_QUANTITY,
+        quantity
+    }
+}
 
 export const deleteCartItem  = (productId) => {
     return {
@@ -52,6 +60,14 @@ export const clearCartItems = () => async (dispatch) => {
     };
 };
 
+// export const fetchCartQuantity = () =>  async dispatch => {
+//     const response = await csrfFetch(`/api/cart_items/quantity`)
+
+//         if (response.ok) {
+//             const quantity = await response.json();
+//             dispatch(getCartItems(quantity))
+//         };
+// };
 
 export const fetchCartItems = () => async dispatch => {
     const response = await csrfFetch('/api/cart_items');
@@ -106,6 +122,8 @@ const cartItemReducer = (oldState = {}, action) => {
         return nextState[action.cartItem.id] = action.cartItem;
         case GET_CART_ITEMS:
         return action.payload.cartItems;
+        // case GET_QUANTITY:
+        // return action.quantity
         case UPDATE_CART_ITEM:
             return nextState[action.cartItem.id] = action.cartItem;
         case DELETE_CART_ITEM:

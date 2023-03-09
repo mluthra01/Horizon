@@ -1,7 +1,7 @@
 
 import './Homepage.css'
 import { NavLink } from 'react-router-dom';
-import Carousel from '../Carousel/Carousel';
+import Carousel from './Carousel/Carousel';
 const Homepage = () => {
 return (
         <div className='homepage-container'>

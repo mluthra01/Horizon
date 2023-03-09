@@ -467,7 +467,7 @@ fileName: "sports and outdoor/yeti cooler.jpg"
 
 # Reviews for Horizon Basics Aluminum USB 3.1 Type-C Docking...
 Review.create!(
-    reviewer_id: 1,
+    user_id: 1,
     product_id: 1,
     body: "This docking station is amazing! It provides all the ports I need for my MacBook and charges my devices super quickly. Highly recommend!",
     rating: 5,
@@ -475,7 +475,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 2,
+    user_id: 2,
     product_id: 1,
     body: "I've been using this docking station for a few weeks now and it's been a great addition to my desk setup. The build quality is solid and it looks great too!",
     rating: 4,
@@ -483,7 +483,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 3,
+    user_id: 3,
     product_id: 1,
     body: "This docking station is exactly what I was looking for! It has all the ports I need and the charging speed is lightning fast.",
     rating: 5,
@@ -491,7 +491,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 4,
+    user_id: 4,
     product_id: 1,
     body: "I was hesitant to buy this docking station at first because of the price, but it's definitely worth it. It's made my work setup so much more efficient and organized!",
     rating: 5,
@@ -499,7 +499,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 5,
+    user_id: 5,
     product_id: 1,
     body: "I was looking for a docking station that could charge my MacBook and other devices at the same time, and this one delivered! It's been a great addition to my home office.",
     rating: 4,
@@ -508,7 +508,7 @@ Review.create!(
 
 # Reviews for Apple 2020 MacBook Air Laptop M1 Chip, 13 Retina Display, 8GB RAM, 256GB SSD Storage, Backlit Keyboard, FaceTime HD Camera, Touch ID
 Review.create!(
-    reviewer_id: 6,
+    user_id: 6,
     product_id: 2,
     body: "I love my new MacBook Air! The M1 chip makes everything lightning fast and the Retina display is beautiful.",
     rating: 5,
@@ -516,7 +516,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 7,
+    user_id: 7,
     product_id: 2,
     body: "The battery life on this MacBook Air is incredible. I've been using it for hours on end and it still has plenty of juice left!",
     rating: 5,
@@ -524,7 +524,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 8,
+    user_id: 8,
     product_id: 2,
     body: "This MacBook Air is perfect for on-the-go work. It's lightweight and easy to carry around, but still has plenty of power for all my tasks.",
     rating: 4,
@@ -532,7 +532,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 9,
+    user_id: 9,
     product_id: 2,
     body: "I was hesitant to upgrade to the M1 chip at first, but I'm so glad I did. This MacBook Air is lightning fast and has been a joy to use.",
     rating: 5,
@@ -540,7 +540,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 10,
+    user_id: 10,
     product_id: 2,
     body: "This MacBook Air is a great value for the price. It has all the features I need for work and personal use, and the Retina display is stunning.",
     rating: 4,
@@ -551,7 +551,7 @@ Review.create!(
 
 # Reviews for SAMSUNG Galaxy S21 FE 5G Cell Phone, Factory Unlocked Android Smartphone, 128GB, 120Hz Display Screen, Pro Grade Camera, All Day Intelligent Battery, US Version, White
 Review.create!(
-    reviewer_id: 11,
+    user_id: 11,
     product_id: 3,
     body: "This phone is amazing! The camera takes stunning photos and the 120Hz display is buttery smooth. I highly recommend it.",
     rating: 5,
@@ -559,7 +559,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 12,
+    user_id: 12,
     product_id: 3,
     body: "The battery life on this phone is incredible. I've been using it for a full day and haven't had to charge it once!",
     rating: 4,
@@ -567,7 +567,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 13,
+    user_id: 13,
     product_id: 3,
     body: "This phone is lightning fast and can handle all my apps and games with ease. The 128GB of storage is plenty for all my photos and music.",
     rating: 5,
@@ -575,7 +575,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 14,
+    user_id: 14,
     product_id: 3,
     body: "The camera on this phone is amazing. I've been able to take some stunning photos and videos with it.",
     rating: 5,
@@ -583,7 +583,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 15,
+    user_id: 15,
     product_id: 3,
     body: "I love the design of this phone - it's sleek and modern. The white color looks especially nice.",
     rating: 4,
@@ -592,7 +592,7 @@ Review.create!(
 
 # Reviews for iPhone 13 Pro, 128GB, Sierra Blue
 Review.create!(
-    reviewer_id: 1,
+    user_id: 1,
     product_id: 4,
     body: "The iPhone 13 Pro is an amazing phone! The camera is top-notch and the battery life is impressive.",
     rating: 5,
@@ -600,7 +600,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 2,
+    user_id: 2,
     product_id: 4,
     body: "I love the Sierra Blue color of this phone. It's a nice change from the usual gold or silver options.",
     rating: 4,
@@ -608,7 +608,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 3,
+    user_id: 3,
     product_id: 4,
     body: "This phone is incredibly fast and responsive. The 128GB of storage is plenty for all my apps and photos.",
     rating: 5,
@@ -616,7 +616,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 4,
+    user_id: 4,
     product_id: 4,
     body: "The camera on this phone is amazing! The new cinematic mode is especially cool.",
     rating: 5,
@@ -624,7 +624,7 @@ Review.create!(
 )
 
 Review.create!(
-    reviewer_id: 5,
+    user_id: 5,
     product_id: 4,
     body: "The battery life on this phone is impressive. I can go a full day without needing to charge it.",
     rating: 4,
@@ -633,7 +633,7 @@ Review.create!(
 
 # Reviews for Bose QuietComfort 35 II Wireless Bluetooth Headphones, Noise-Cancelling, with Alexa Voice Control - Black
 Review.create!(
-    reviewer_id: 6,
+    user_id: 6,
     product_id: 5,
     body: "These headphones are amazing! The noise cancellation is top-notch and the sound quality is excellent.",
     rating: 5,

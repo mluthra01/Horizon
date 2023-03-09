@@ -38,9 +38,6 @@ class Api::CartItemsController < ApplicationController
 
         render json: ['lol']
         end
-        # @cart = CartItem.find_by(id: params[:id])
-        # @cart.destroy_all
-        # render json: ["deleted"]
     end
 
 
@@ -58,6 +55,18 @@ class Api::CartItemsController < ApplicationController
         @cart = CartItem.find_by(id: params[:id])
         @cart.destroy
         render json: ["deleted"]
+    end
+
+    def get_quantity
+        @cart_items = CartItem.all
+        render :quantity
+        # @cart_item = CartItem.find_by(id: params[:id])
+        # if @cart_item
+        #     @quantity = @cart_item.quantity
+        #     render :quantity
+        # else 
+        #     render json: { error: "Cart item not found" }, status: :not_found 
+        # end
     end
 
     private

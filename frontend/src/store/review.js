@@ -1,5 +1,5 @@
 import csrfFetch from "./csrf";
-
+import { GET_PRODUCT } from "./product";
 export const GET_REVIEWS = 'reviews/get_reviews'
 export const GET_REVIEW = "reviews/get_review"
 export const REMOVE_REVIEW = "reviews/delete_review"
@@ -64,10 +64,10 @@ export const createReview = (review) => async dispatch => {
             const review = await response.json();
             dispatch(receiveReview(review))
         }
-        else {
-            const errors = await response.json();
-            return errors;
-        };
+        // else {
+        //     const errors = await response.json();
+        //     return errors;
+        // };
 };
 
 export const updateReview = (review) => async dispatch => {
@@ -98,6 +98,8 @@ export const updateReview = (review) => async dispatch => {
             const reviewId = action.reviewId
             delete nextState.review[reviewId]
             return nextState;
+        case GET_PRODUCT:
+            return action.payload.reviews
         default:
             return oldState;
     };

@@ -3,7 +3,11 @@ import { NavLink } from 'react-router-dom'
 const ProductItem = ({product}) => {
 
     if (!product) return null;
-    const {id, name, price } = product
+    const {id, name, price, rating } = product
+    
+
+
+
     
     return (
         <div className="all-products-container">
@@ -20,6 +24,11 @@ const ProductItem = ({product}) => {
                 : product.name
                 }
                 </h3>
+                <img
+                    className="star-ratings-img"
+                    src="/assets/review_filled_star.png"
+                    alt="filled-star"
+                />
                 <div className="product-card-price">${product.price.toFixed(2)}</div>
             </div>
         </li>

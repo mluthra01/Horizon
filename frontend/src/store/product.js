@@ -1,6 +1,7 @@
 import csrfFetch from "./csrf";
 import { GET_PRODUCTS_BY_CATEGORY } from "./category";
 import { DELETE_CART_ITEM, GET_CART_ITEMS } from "./cartItem";
+import { GET_QUANTITY } from "./cartItem";
 export const GET_PRODUCT = 'products/GET_PRODUCT';
 export const GET_PRODUCTS = 'products/GET_PRODUCTS';
 export const SET_SEARCH_QUERY = 'products/SET_SEARCH_QUERY';
@@ -13,10 +14,10 @@ export const getProducts = (products) => {
     };
 };
 
-export const getProduct = (product) => {
+export const getProduct = (payload) => {
     return {
         type: GET_PRODUCT,
-        product
+        payload
     };
 };
 
@@ -58,6 +59,15 @@ export const fetchProduct = (productId) => async dispatch => {
 
 };
 
+export const fetchRandomProducts = () => async dispatch => {
+    const response = await csrfFetch('/api/products/random');
+
+    if (response.ok) {
+    const products = await response.json();
+    dispatch(getProducts(products));
+    };
+};
+
 
 export const searchProducts = (query) => async (dispatch) => {
     const response = await csrfFetch(`/api/products?search=${query}`);
@@ -75,7 +85,7 @@ const productsReducer = (oldState = {}, action) => {
         const products = action.products;
             return products;
         case GET_PRODUCT:
-        const product =  action.product
+        const product =  action.payload.product
         nextState[product.id] = product
             return nextState;
         case GET_PRODUCTS_BY_CATEGORY:

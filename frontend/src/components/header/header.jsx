@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { fetchProducts, searchProducts } from '../../store/product';
 import { useHistory, useLocation } from 'react-router-dom';
 import SearchResults from '../SearchResults/SearchResults';
-import { fetchCartItems, clearCart, getCartItems } from '../../store/cartItem';
+import { fetchCartItems, clearCart, getCartItems, fetchCartQuantity } from '../../store/cartItem';
 
 const Header = () => {
 

@@ -18,5 +18,10 @@ class Api::ProductsController < ApplicationController
             @product = Product.find_by(id: params[:id])
             render 'api/products/show'
         end
+
+    def random
+        @products = Product.all.order("RANDOM()").limit(12)
+        render 'api/products/index'
+    end
         
 end

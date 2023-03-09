@@ -6,6 +6,7 @@ import { fetchProduct, receiveProduct } from "../../../store/product";
 import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
 import Review from "../../Reviews/Reviews";
+import { fetchReview, receiveReviews } from "../../../store/review";
 
 
 const ProductShow = () => {
@@ -15,11 +16,44 @@ const { productId } = useParams();
 const product = useSelector(receiveProduct(productId));
 const [count , setCount ] = useState(1);
 const user = useSelector(state => state.session.user)
+const reviews = useSelector(receiveReviews)
 const history = useHistory();
 
 useEffect(() => {
     dispatch(fetchProduct(productId));
 },[dispatch, productId]);
+
+let rating = 0;
+    reviews.forEach(review => {
+        rating += review.rating
+    });
+    if (rating > 0 ) {
+        rating = (rating / reviews.length ).toFixed(1);
+    }
+
+    const displayRating = (rating) => {
+        let stars = [];
+        for ( let i = 0; i < Math.floor(rating); i++) {
+            stars.push(
+                <img
+                    className="star-ratings-img"
+                    src="/assets/review_filled_star.png"
+                    alt="filled-star"
+                />
+            );
+        };
+        for (let i = rating; i < 5; i++) {
+        stars.push(
+            <img
+                className="star-ratings-image"
+                src="/assets/review_empty_star.png"
+                alt="empty-star"
+            ></img>
+            );
+        };
+    return stars;
+    };
+
 
 if (!product) {
     return null;
@@ -83,7 +117,8 @@ const [wholePrice, fractionPrice] = price.split('.')
         <div className="product-middle-container">
                 <span className="product-name">{product.name}</span>
                 <div className="product-ratings">
-                    Ratings go here
+                    {displayRating(rating)}
+                    <span className="ratings-length"> {reviews.length} ratings</span>
                 </div>
                     <hr />
                 <div className="product-price">
