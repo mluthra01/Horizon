@@ -24,7 +24,7 @@ wrap_parameters include: Review.attribute_names + ['userId', 'productId']
         @user = current_user
         @review = Review.find_by(id: params[:id])
         @review.user_id = @user.id
-            if @review && review.update(review_params)
+            if @review && @review.update(review_params)
                 render :show
             else
                 render json: ["Review can not be updated"]
@@ -34,8 +34,11 @@ wrap_parameters include: Review.attribute_names + ['userId', 'productId']
     def destroy
         @user = current_user
         @review = Review.find_by(id: params[:id])
-        @review.destroy
-        render :index
+        if @review &&  @review.destroy
+        render :show
+        else
+        render json: @review.errors_full_messages, status: 422
+        end
 
     end
 

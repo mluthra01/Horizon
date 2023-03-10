@@ -2,55 +2,89 @@ import "./ReviewCreateForm.css"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { createReview } from "../../../store/review";
+import { createReview, fetchReview, receiveReview, updateReview } from "../../../store/review";
 import { fetchProduct, receiveProduct } from "../../../store/product";
 
 
 const ReviewCreateForm = () => {
     const dispatch = useDispatch();
-    const { productId } = useParams();
+    const { productId, reviewId } = useParams();
     const product = useSelector(receiveProduct(productId));
     const history = useHistory();
-    const [errors, setErrors ] = useState([]);
-    const [headline, setHeadline] = useState('');
-    const [body, setBody] = useState('');
-    const [rating, setRating] = useState(0);
     const userId = useSelector(state => state.session.user?.id);
+    const formType = reviewId ? 'Edit Review' : 'Create Review'
 
-    useEffect(() => {
-        dispatch(fetchProduct(productId));
-    },[dispatch, productId]);
+    const review = useSelector(state => {
+    if (formType === "Edit Review") {
+    return receiveReview(reviewId)(state);
+    } else {
+    return { headline: "", body:"", rating:"", productId: productId || "", userId: userId || ""} ;
+    }
+});
+
+useEffect(() => {
+if (reviewId) {
+        dispatch(fetchReview(reviewId))
+    }
+},[reviewId, dispatch]);
+
+useEffect(() => {
+dispatch(fetchProduct(productId));
+},[dispatch, productId]);
+
+    const [errors, setErrors ] = useState([]);
+    const [headline, setHeadline] = useState(review ? review.headline ? review.headline : '' : '');
+    const [body, setBody] = useState(review ? review.body ? review.body : '' : '');
+    const [rating, setRating] = useState(review ? review.rating ? review.rating : '' : '');
 
     if (userId === undefined) history.push("/login");
     if (!product) return null;
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
+
+        const reviewData = {
+            ...review,
+            headline,
+            body,
+            rating,
+            userId,
+            productId
+        }
         setErrors([]);
-        dispatch(createReview({ productId, userId, headline, body, rating }))
+        if (formType === "Edit Review") {
+        dispatch(updateReview(reviewData))
             .then(() => {
             history.push(`/products/${productId}`)
-            })
-            .catch(async (response) => {
-                let data;
-                try {
-                    data = await response.clone().json();
-                } catch {
-                    data = await response.text();
-                }
-                if (rating === 0) {
-                    if (data?.errors) {
-                        data.errors.push("Rating must be chosen");
-                    } 
-                    else {
-                        data.push("Ratings must be greater than 0")
-                    }
-                }
-                    if (data?.errors) setErrors(data.errors);
-                    else if (data) setErrors([data]);
-                    else setErrors([response.statusText]);
-            });
-    };
+        })
+            .catch(handleError);
+        } else {
+        dispatch(createReview({ productId, userId, headline, body, rating }))
+        .then(() => {
+            history.push(`/products/${productId}`)
+        })
+            .catch(handleError);
+        }
+    }
+    
+const handleError = async (response) => {
+    let data;
+    try {
+    data = await response.clone().json();
+    } catch {
+    data = await response.text();
+    }
+    if (rating === 0) {
+    if (data?.errors) {
+        data.errors.push("Rating must be chosen");
+    } else {
+        data.push("Ratings must be greater than 0");
+    }
+    }
+    if (data?.errors) setErrors(data.errors);
+    else if (data) setErrors([data]);
+    else setErrors([response.statusText]);
+};
 
 
     const handleRatingClick = (e, num) => {
@@ -100,7 +134,7 @@ const stars = [...Array(5)].map((_, index) => renderStar(index));
         <div className="create-review-container">
             <form onSubmit={handleSubmit}>
                 <div className="create-review-top-container">
-                    <div className="create-review-heading">Create Review</div>
+                    <div className="create-review-heading">{formType}</div>
                     <div className=" create-review-product-container">
                         <div className="create-review-product-img">
                             <img
@@ -123,7 +157,7 @@ const stars = [...Array(5)].map((_, index) => renderStar(index));
                         Overall Rating
                     </div>
                     <div className="create-review-star-rating-container">{stars}</div>
-                    {/* <div className="review-error">{displayError("rating")}</div> */}
+    
                 </div>
                 <hr />
                     <label className="headline-label"> Add a headline
@@ -133,7 +167,7 @@ const stars = [...Array(5)].map((_, index) => renderStar(index));
                             placeholder="What's most important to know?"
                             onChange={(e) => setHeadline(e.target.value)} 
                         />
-                        {/* <div className="review-error">{displayError("headline")}</div> */}
+                        
                     </label>
                     <hr />
                     <label className="body-label"> Add a written review
@@ -143,14 +177,14 @@ const stars = [...Array(5)].map((_, index) => renderStar(index));
                             value={body}
                             onChange={(e) => setBody(e.target.value)} 
                         />
-                            {/* <div className="review-error">{displayError("body")}</div> */}
+            
                     </label>
                     <hr />
                     <div className="create-review-submit-container">
                         <input
                             className="create-review-submit-button"
                             type="Submit"
-                            value="Submit"
+                            value={formType}
                             readOnly
                         />
                     </div>

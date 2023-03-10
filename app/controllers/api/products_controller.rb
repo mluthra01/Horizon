@@ -21,7 +21,7 @@ class Api::ProductsController < ApplicationController
 
     def random
         @products = Product.all.order("RANDOM()").limit(12)
-        render 'api/products/index'
+        render 'api/products/random'
     end
         
 end

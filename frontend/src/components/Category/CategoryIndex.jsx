@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProductsByCategory, recieveProductsByCategory } from '../../store/category';
 import { NavLink } from "react-router-dom";
-import './CategoryIndex.css'
+import RatingStars from '../RatingStars/RatingStar';
+
 
 const CategoryIndex = () => {
 const { categoryId } = useParams();
@@ -24,7 +25,7 @@ useEffect(() => {
   else if (categoryId === '3' ) {
       categoryName = 'Beauty'
   }
-  else if (categoryId == '4') {
+  else if (categoryId === '4') {
       categoryName = 'Sports and Outdoors'
   }
   else if (categoryId === '5') {
@@ -54,6 +55,11 @@ useEffect(() => {
                   product.name.slice(0, product.name.lastIndexOf(' ', 50)) + "..."
                   : product.name }
                 </div>
+                <div className="product-item-rating">
+                        <span className="product-item-rating-val"></span>
+                        <RatingStars rating={product.avgRating} />
+                        <span className="product-ratings-length"></span>
+                    </div>
                 <div className="product-card-price">
                   ${product.price.toFixed(2)}
                 </div>

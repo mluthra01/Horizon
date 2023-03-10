@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchProducts, receiveProducts} from "../../../store/product"
+import { receiveReviews } from "../../../store/review";
 import './ProductIndex.css'
 import ProductItem from "./ProductItem/ProductItem";
 const ProductIndex = () => {
     const products = useSelector(receiveProducts);
+    const reviews = useSelector(receiveReviews);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(fetchProducts())
+        dispatch(fetchProducts())
     },[dispatch])
 
     if (!products) {
@@ -21,7 +24,7 @@ const ProductIndex = () => {
       <ul className="all-the-products">
         {products.map(product => (
           <li className="product-cards" key={product.id}>
-            <ProductItem product={product} />
+            <ProductItem product={product} reviews={reviews}/>
           </li>
         ))}
       </ul>

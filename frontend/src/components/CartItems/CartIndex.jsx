@@ -1,9 +1,9 @@
 import CartItem from "./CartItem/CartItemsIndex"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, clearCartItems, getCartItems } from "../../store/cartItem";
+import { clearCartItems} from "../../store/cartItem";
 import { fetchCartItems } from "../../store/cartItem";
-import { fetchProducts, receiveProducts } from "../../store/product";
+import {  receiveProducts } from "../../store/product";
 import { useHistory } from "react-router-dom";
 import './CartIndex.css'
 import CartEmpty from "./CartEmpty/CartEmpty";
@@ -12,18 +12,19 @@ const CartIndex = () => {
 const dispatch = useDispatch();
 const history = useHistory();
 const products = useSelector(receiveProducts);
-const [subtotal, setSubtotal ] = useState(0.0);
+const [subtotal, setSubtotal] = useState(0.0);
 const cartItems = useSelector(state => state.cartItems);
 const carts = Object.values(cartItems)
 const allCartItems = products.map((product) => (
-    <div key={product}>
-        <CartItem key={product.id} product={product} />
+    <div key={product.id} >
+        <CartItem  product={product} />
         <hr />
     </div>
     ));
+
     useEffect(() => {
         calculateSubTotal();
-    });
+    },[products]);
 
         useEffect(() => {
         dispatch(fetchCartItems())
@@ -31,11 +32,11 @@ const allCartItems = products.map((product) => (
     
     const calculateCartSize = () => {
         let size = 0;
-        carts.map(cart => {
+        carts.map(cart => (
             size += cart.quantity
-        });
+        ));
         return size
-    }
+    };
 
 const calculateSubTotal = () => {
     let subTotal = 0;
@@ -51,11 +52,10 @@ const handleSubmit = (e) => {
     history.push('/checkout')
 };
 
-
     if (!carts) return null;
     return (
 
-        <div className="cart-background-container">
+        <div className="cart-bg-container">
             { calculateCartSize() > 0 && (
             <>
             <div className="cart-heading">Shopping Cart</div>
@@ -90,7 +90,7 @@ const handleSubmit = (e) => {
             )}
     
         </div>
-    )
-}
+    );
+};
 
 export default CartIndex

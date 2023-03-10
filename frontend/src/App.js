@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom'
 import CategoryBar from './components/CategoryBar/CategoryBar';
 import Header from './components/header/header';
@@ -15,7 +16,8 @@ import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
 import SearchResults from './components/SearchResults/SearchResults';
 import Checkout from './components/CheckoutPage/Checkout';
 import ReviewCreateForm from './components/ReviewForms/ReviewCreateForm/ReviewCreateForm';
-import ReviewEditForm from './components/ReviewForms/ReviewEditForm/ReviewEditForm';
+import Address from './components/Address/Address';
+
 
 
 function App() {
@@ -41,7 +43,7 @@ function App() {
           <CartEmpty />
           <Footer />
       </Route>
-      <Route exact path='/products'>
+      <Route exact path='/products/'>
         <Header />
         <CategoryBar />
         <ProductIndex />
@@ -50,7 +52,6 @@ function App() {
       <Route exact path="/products/:productId">
           <Header />
           <CategoryBar />
-          {/* <ProductIndex /> */}
           <ProductShow />
           <Footer />
       </Route>
@@ -75,17 +76,20 @@ function App() {
       <Route exact path="/checkout">
         <Checkout />
       </Route>
-      <Route exact path="/products/:productId/review">
+      <Route exact path="/products/:productId/review/:reviewId?">
         <Header />
         <CategoryBar />
         <ReviewCreateForm />
         <Footer />
       </Route>
-      <Route exact path="/products/:productId/review/:reviewId/edit">
-        <Header />
-        <CategoryBar />
-        <ReviewEditForm />
-        <Footer />
+      <Route exact path="/addresses">
+        <Address />
+      </Route>
+      <Route exact path="/returns">
+        <Address />
+      </Route>
+      <Route path="*">
+          <Redirect to="/" />
       </Route>
     </Switch>
     </>

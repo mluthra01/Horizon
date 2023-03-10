@@ -6,7 +6,8 @@ import { fetchProduct, receiveProduct } from "../../../store/product";
 import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
 import Review from "../../Reviews/Reviews";
-import { fetchReview, receiveReviews } from "../../../store/review";
+import RatingStars from "../../RatingStars/RatingStar";
+import {  receiveReviews } from "../../../store/review";
 
 
 const ProductShow = () => {
@@ -31,28 +32,6 @@ let rating = 0;
         rating = (rating / reviews.length ).toFixed(1);
     }
 
-    const displayRating = (rating) => {
-        let stars = [];
-        for ( let i = 0; i < Math.floor(rating); i++) {
-            stars.push(
-                <img
-                    className="star-ratings-img"
-                    src="/assets/review_filled_star.png"
-                    alt="filled-star"
-                />
-            );
-        };
-        for (let i = rating; i < 5; i++) {
-        stars.push(
-            <img
-                className="star-ratings-image"
-                src="/assets/review_empty_star.png"
-                alt="empty-star"
-            ></img>
-            );
-        };
-    return stars;
-    };
 
 
 if (!product) {
@@ -108,7 +87,7 @@ const [wholePrice, fractionPrice] = price.split('.')
                 <img 
                     className="product-image-show"
                     src={product.photoUrl}
-                    alt={product.name}
+                    alt="product-show"
                 ></img>
             </div>
 
@@ -117,8 +96,9 @@ const [wholePrice, fractionPrice] = price.split('.')
         <div className="product-middle-container">
                 <span className="product-name">{product.name}</span>
                 <div className="product-ratings">
-                    {displayRating(rating)}
-                    <span className="ratings-length"> {reviews.length} ratings</span>
+                    <RatingStars rating={rating}/>
+                    <span className="ratings-length">{reviews.length}</span> 
+                    <span className="rating-or-ratings">{reviews.length === 1 ? "rating" : "ratings"} </span>
                 </div>
                     <hr />
                 <div className="product-price">
@@ -136,12 +116,10 @@ const [wholePrice, fractionPrice] = price.split('.')
                 {/* <div className="product-description"> */}
                     <div className="description-heading">About this item</div>
                     <ul className="description-list">
-                        {description.map(item =>  
-                        <li className="description-content" key={item}>{item + '.'}</li>
+                        {description.map((item, i) =>  
+                        <li className="description-content" key={i}>{item + '.'}</li>
                     )}
                     </ul>
-                
-                {/* </div> */}
             </div>
         
 

@@ -18,13 +18,23 @@ const Checkout = () => {
                         <div className="order-placed-thanks">Order placed, thanks!</div>
                     </div>
                 </div>
-                <div className="checkout-footer-container">
-                    <div className="checkout-links">
-                        <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/madhur-luthra-08a53a126/">LinkedIn</a>
-                        <a rel="noreferrer" target="_blank" href="https://github.com/mluthra01">GitHub</a>
-                        <a rel="noreferrer" target="_blank" href="https://github.com/mluthra01/Horizon">Project repo</a>
-                    </div>
+                <div className='checkout-links-container'>
+                <div className="address-links">
+                    <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/madhur-luthra-08a53a126/">
+                        <img 
+                        src='/assets/linkedin.png'
+                        alt='linkedin'
+                    />
+                    </a>
+                    <a rel="noreferrer" target="_blank" href="https://github.com/mluthra01">
+                        <img 
+                        src='/assets/github-logo.png'
+                        alt='github'
+                        />
+                    </a>
+                    <a rel="noreferrer" target="_blank" href="https://github.com/mluthra01/Horizon" className='repo'>Project repo</a>
                 </div>
+            </div>
             </div>
         </div>
 

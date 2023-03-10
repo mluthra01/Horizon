@@ -2,6 +2,7 @@
 import './Homepage.css'
 import { NavLink } from 'react-router-dom';
 import Carousel from './Carousel/Carousel';
+import Recommendations from './Recommendations/Recommendation';
 const Homepage = () => {
 return (
         <div className='homepage-container'>
@@ -10,7 +11,7 @@ return (
             </div>
             <div className='card-container'>
                 <div className='grid-box'>
-                    <NavLink to={'/category/1'}><div className='card-label'>Electronics</div></NavLink>
+                    <NavLink style={{textDecoration: "none"}}to={'/category/1'}><div className='card-label'>Electronics</div></NavLink>
                     <div className='card-image-container'>
                         <div className='grid-box-image'>
                             <NavLink to={'/products/2'}>
@@ -57,7 +58,7 @@ return (
             </div>
             <div className='card-container'>
                 <div className='grid-box'>
-                    <NavLink to={'/category/2'}><div className='card-label'>Best Sellers</div></NavLink>
+                    <NavLink style={{textDecoration: "none"}} to={'/category/2'}><div className='card-label'>Best Sellers</div></NavLink>
                     <div className='card-image-container'>
                         <div className='grid-box-image'>
                             <NavLink to={'/products/4'}>
@@ -104,7 +105,7 @@ return (
             </div>
             <div className='card-container'>
                 <div className='grid-box'>
-                    <NavLink to={'/category/3'}><div className='card-label'>Horizon Basics</div></NavLink>
+                    <NavLink style={{textDecoration: "none"}} to={'/category/3'}><div className='card-label'>Horizon Basics</div></NavLink>
                     <div className='card-image-container'>
                         <div className='grid-box-image'>
                             <NavLink to={'/products/15'}>
@@ -151,7 +152,7 @@ return (
             </div>
             <div className='card-container'>
                 <div className='grid-box'>
-                    <NavLink to={'/category/3'}><div className='card-label'>Home and kitchen</div></NavLink>
+                    <NavLink style={{textDecoration: "none"}} to={'/category/3'}><div className='card-label'>Home and kitchen</div></NavLink>
                     <div className='card-image-container'>
                         <div className='grid-box-image'>
                             <NavLink to={'/products/12'}>
@@ -196,8 +197,9 @@ return (
                     </div>
                 </div>
             </div>
-
-
+                <div className='recommendations'> 
+                < Recommendations style={{textDecoration: "none"}} />
+                </div>
 
 
         </div>

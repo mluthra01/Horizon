@@ -28,4 +28,10 @@ class Product < ApplicationRecord
         class_name: :Review,
         dependent: :destroy
 
+    def avg_rating
+        reviews = self.reviews
+        total = reviews.map{|review| review.rating }
+            total.sum / (reviews.length * 1.0)
+    end
+
 end

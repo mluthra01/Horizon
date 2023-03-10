@@ -124,6 +124,7 @@
 .header-user-content > a {
     text-decoration: none;
     color: white;
+    position: relative;
 }
 
 .signIn-signOut-button {
@@ -150,11 +151,10 @@
 .dropdown {
     position: absolute;
     top: 54px;
+    /* top: 70px; */
     display: flex;
     flex-direction: column;
     width: 165px;
-    padding-top: 12px;
-    padding-bottom: 12px; 
     border-radius: 3px;
     background-color: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -166,17 +166,17 @@
     display: flex;
     flex-direction: column;
     width: 300px;
-    padding-top: 15px;
-    padding-bottom: 15px;
     border-radius: 3px;
     background-color: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 5;
+    overflow: hidden;
 }
 .your-account {
     color: #0F1111;
     font-size: 16px;
     font-weight: 700;
+    padding-top: 10px;
     padding-bottom: 5px;
 }
 
@@ -184,6 +184,7 @@
     font-size: 13px;
     color: #444444;
     font-weight: 400;
+    padding-bottom: 7px;
 }
 .your-account > a {
 text-decoration: none;
@@ -194,6 +195,8 @@ text-decoration: none;
     align-items: center;
     gap: 8px;
 }
+
+
 .dropdown-up-arrow {
     position: absolute;
     top: 46px;
@@ -205,16 +208,54 @@ text-decoration: none;
     border-bottom: 8px solid white;
 }
 
+.dropdown-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
 
-/* .background {
-    position: fixed;
-    top: 60px;
-    left: 0px;
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100vw;
-    height: 100vh;
-    z-index: 4;
-} */
+.dropdown-signin-button,
+.dropdown-demo-login-button {
+    font-size: 13px;
+    margin-bottom: 13px;
+    width: 80%;
+    background-image: linear-gradient(to bottom, #f8e3ad, #eeba37);
+    border-color: #c89411 #b0820f #99710d;
+    color: #111;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    height: 33px;
+    border-radius: 2px;
+}
+
+.dropdown-signin-button:hover,
+.dropdown-demo-login-button:hover {
+    background: linear-gradient(to bottom, #f6da95, #ecb21f);
+}
+
+.dropdown-signup-label {
+    text-align: center;
+    font-size: 11px;
+    color: #333;
+    margin: 2px 0 9px 0;
+}
+
+.dropdown-signup-link {
+    font-size: 11px;
+    text-decoration: none;
+    color: #05a;
+    display: inline;
+}
+
 
 /* RETURN AND ORDERS BUTTON */
 .header-return-and-orders{
@@ -304,51 +345,4 @@ border: 1px solid transparent;
 }
 
 
-.dropdown-right-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-}
-
-.dropdown-signin-button,
-.dropdown-demo-login-button {
-    font-size: 13px;
-    margin-bottom: 13px;
-    width: 80%;
-    background-image: linear-gradient(to bottom, #f8e3ad, #eeba37);
-    border-color: #c89411 #b0820f #99710d;
-    color: #111;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    text-align: center;
-    text-decoration: none;
-    height: 33px;
-    border-radius: 2px;
-}
-
-.dropdown-signin-button:hover,
-.dropdown-demo-login-button:hover {
-    background: linear-gradient(to bottom, #f6da95, #ecb21f);
-}
-
-.dropdown-signup-label {
-    text-align: center;
-    font-size: 11px;
-    color: #333;
-    margin: 2px 0 9px 0;
-}
-
-.dropdown-signup-link {
-    font-size: 11px;
-    text-decoration: none;
-    color: #05a;
-    display: inline;
-}
 

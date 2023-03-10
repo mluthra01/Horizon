@@ -1,28 +1,26 @@
 import React, { useEffect, useRef} from 'react';
 import './header.css';
-import { NavLink, useParams} from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { NavLink} from 'react-router-dom'
 import * as sessionActions from '../../store/session'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
-import { fetchProducts, searchProducts } from '../../store/product';
+import { searchProducts } from '../../store/product';
 import { useHistory, useLocation } from 'react-router-dom';
-import SearchResults from '../SearchResults/SearchResults';
-import { fetchCartItems, clearCart, getCartItems, fetchCartQuantity } from '../../store/cartItem';
+import { fetchCartItems, clearCart} from '../../store/cartItem';
 
 const Header = () => {
-
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const history = useHistory();
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const  [isDropdownOpen, setIsDropdownOpen] = useState(false);;
+  const  [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const inputRef = useRef(null);
   const cartItems = useSelector(state => state.cartItems);
   const quantities = Object.values(cartItems);
   const totalQuantity = quantities.reduce((sum, item) => sum += item.quantity, 0);
+
 
   const handleMouseEnter = () => {
     setIsDropdownOpen(true);
@@ -31,9 +29,6 @@ const Header = () => {
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
   };
-
-const background = isDropdownOpen ? <div className='background'></div> : null;
-
 
   useEffect(() => {
     if (user) {
@@ -53,7 +48,7 @@ const background = isDropdownOpen ? <div className='background'></div> : null;
         inputRef.current.style.boxShadow = null;
       }
     };
-
+    setSearchQuery('')
     document.addEventListener('click', handleClickOutside);
 
     return () => {
@@ -68,6 +63,7 @@ const background = isDropdownOpen ? <div className='background'></div> : null;
       if (searchQuery.length > 0) {
       history.push(`/search/${searchQuery}`);
     }
+
     };
 
 
@@ -100,6 +96,7 @@ return (
       </div>
 
     {/* ADDRESS BUTTON */}
+    <NavLink to="/addresses"  style={{textDecoration: "none"}}>
     <div className='address-section'>
             <div className='address-icon' />
         <div className='header-address-button'>
@@ -107,6 +104,7 @@ return (
             <div className='address-select'>Select your address</div>
         </div>
     </div>
+    </NavLink>
 
 
     {/* SEARCH BAR */}
@@ -124,7 +122,7 @@ return (
     {/* PROFILE BUTTON */}
       <div className="header-profile"
           onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
+          onMouseLeave={handleMouseLeave}>
         <div className="header-user-content" >
               <NavLink to={'/login'} >
                   <div className="header-greeting" >
@@ -140,7 +138,6 @@ return (
         </div>
         {!user  && <div className="dropdown-logout">
                 <div className="dropdown__toggle"  >
-                {/* <i hidden className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`}></i> */}
                 </div>
               {isDropdownOpen && (
                 <div className="dropdown__menu">
@@ -160,27 +157,26 @@ return (
                   
         {user && <div className="dropdown">
                 <div className="dropdown__toggle"  >
-                {/* <i className={`fas fa-chevron-${isDropdownOpen ? 'up' : 'down'}`}></i> */}
                 </div>
               {isDropdownOpen && (
                 <div className="dropdown__menu">
                     <div className='your-account'>Your Account</div>
                   <NavLink className='dropdown-links' to="/addresses">Manage addresses</NavLink>
-                  <NavLink className='dropdown-links' to="/orders">Manage orders</NavLink>
+                  <NavLink className='dropdown-links' to="/returns">Manage orders</NavLink>
                   <NavLink className='dropdown-links' to={(pathname === '/cart' ? '/cart' : '/')} onClick={handleLogout}>Sign out</NavLink>
                 </div>
               )}
           </div>}
-
                 {isDropdownOpen && <div className='dropdown-up-arrow'></div>}
-                <div>{background}</div>
       </div>
 
     {/* RETURNS AND ORDERS */}
+    <NavLink to="/returns"  style={{textDecoration: "none"}}>
       <div className="header-return-and-orders">
             <div className="header-returns">Returns</div>
             <div className="header-orders">& Orders</div>
       </div>
+      </NavLink>
 
 
     {/* CART-ITEMS */}

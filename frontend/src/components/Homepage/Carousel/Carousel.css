@@ -17,15 +17,8 @@
 .slick-prev {
     left: -33px;
 }
-/* .slick-dots {
-    bottom: -45px;
-}
 
-.slick-dots li button:before {
-    color: black;
-    font-size: 10px;
-} */
-
+/* 
 @media (max-width: 768px) {
     .slick-dots {
         bottom: -25px;
@@ -34,4 +27,4 @@
     .slick-dots li button:before {
         font-size: 6px;
     }
-}
+} */

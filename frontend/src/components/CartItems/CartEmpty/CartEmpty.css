@@ -1,13 +1,13 @@
 
 .cart-page-container {
     background: #eaeded;
-    width: 100%;
-    height: 100vh;
+    /* width: 100%;
+    height: 100%; */
     display: flex;
 }
 .empty-cart-container {
     margin-top: 150px;
-    margin-left: 50px;;
+    margin-left: 50px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;

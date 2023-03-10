@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchDeleteCartItem, fetchUpdateCart } from "../../../store/cartItem";
@@ -13,7 +13,7 @@ const dispatch = useDispatch();
 
 useEffect(() => {
     dispatch(fetchUpdateCart(cartItemId, count))
-},[ cartItemId, count])
+},[ dispatch, cartItemId, count])
 
 const quantitySelect = [
     "0", "1", "2", "3", "4", "5",
@@ -38,7 +38,7 @@ const quantitySelect = [
                 <NavLink to={`/products/${id}`} target="_blank">
                 <img className="cart-product-img" 
                     src={photoUrl} 
-                    alt="product-photo"
+                    alt="product"
                 />
                 </NavLink>
             </div>

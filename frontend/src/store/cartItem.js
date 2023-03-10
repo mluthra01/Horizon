@@ -21,10 +21,10 @@ export const getCartItems = (payload) => {
     };
 };
 
-export const getQuantity = (quantity) => {
+export const getQuantity = (payload) => {
     return {
         type: GET_QUANTITY,
-        quantity
+        payload
     }
 }
 
@@ -121,9 +121,9 @@ const cartItemReducer = (oldState = {}, action) => {
         case ADD_TO_CART:
         return nextState[action.cartItem.id] = action.cartItem;
         case GET_CART_ITEMS:
-        return action.payload.cartItems;
+        return action.payload.cartItems
         // case GET_QUANTITY:
-        // return action.quantity
+        // return nextState["quantity"] = action.payload.quantity
         case UPDATE_CART_ITEM:
             return nextState[action.cartItem.id] = action.cartItem;
         case DELETE_CART_ITEM:
