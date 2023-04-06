@@ -143,7 +143,7 @@ return (
                 <div className="dropdown__menu">
                     <div className='your-account'></div>
                   <NavLink style={{textDecoration: "none" ,color: "black"}} className='dropdown-links dropdown-signin-button' to="/login">Sign in</NavLink>
-                  <div onClick={demoLogin} className="dropdown-links dropdown-demo-login-button" > Demo login</div>
+                  <div onClick={demoLogin} className="dropdown-link dropdown-demo-login-button" > Demo login</div>
                 <div className="dropdown-signup-label">
                         New customer?{" "}
                         <NavLink className="dropdown-signup-link" to="/signup">
@@ -154,7 +154,6 @@ return (
               )}
           </div>}
 
-                  
         {user && <div className="dropdown">
                 <div className="dropdown__toggle"  >
                 </div>
