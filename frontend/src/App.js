@@ -16,9 +16,6 @@ import CartEmpty from './components/CartItems/CartEmpty/CartEmpty';
 import SearchResults from './components/SearchResults/SearchResults';
 import Checkout from './components/CheckoutPage/Checkout';
 import ReviewCreateForm from './components/ReviewForms/ReviewCreateForm/ReviewCreateForm';
-import Address from './components/Address/Address';
-
-
 
 function App() {
   return (
@@ -81,12 +78,6 @@ function App() {
         <CategoryBar />
         <ReviewCreateForm />
         <Footer />
-      </Route>
-      <Route exact path="/addresses">
-        <Address />
-      </Route>
-      <Route exact path="/returns">
-        <Address />
       </Route>
       <Route path="*">
           <Redirect to="/" />

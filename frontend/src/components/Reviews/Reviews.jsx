@@ -13,15 +13,6 @@ const history = useHistory();
 const reviews = useSelector(receiveReviews) || {}
 const userId = useSelector((state) => state.session.user?.id);
 
-// useEffect(() => {
-//     dispatch(fetchReview(reviewId))
-// }, [dispatch, reviewId]);
-
-// const countries = ['USA', 'Canada', 'Australia', 'Japan', 'Brazil', 'India', 'Mexico'];
-//     const getRandomCountry = () => {
-//     const randomIndex = Math.floor(Math.random() * countries.length);
-//     return countries[randomIndex];
-//     };
 
     let rating = 0;
     reviews.forEach((review) => {

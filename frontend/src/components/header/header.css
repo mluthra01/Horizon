@@ -186,6 +186,12 @@
     font-weight: 400;
     padding-bottom: 7px;
 }
+
+.dropdown-links:hover {
+text-decoration: underline;
+color: #c45500;
+cursor: pointer;
+}
 .your-account > a {
 text-decoration: none;
 }

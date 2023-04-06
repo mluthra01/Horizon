@@ -1,7 +1,6 @@
 
 .address-container  {
 background: #eaeded;
-height: 1100px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -18,7 +17,6 @@ align-items: center;
     padding: 20px;
     width: 1000px;
     height: 450px;
-    margin: 50px auto;
 }
 
 .address-heading{
@@ -60,4 +58,36 @@ width: 800px;
 .address-links img {
     height: 30px;
     filter: brightness(0.8) invert(1);
+}
+
+/* MODAL */
+.address-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.address-modal-content {
+    position: relative;
+    background-color: white;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+.address-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

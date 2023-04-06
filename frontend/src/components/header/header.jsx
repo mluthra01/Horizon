@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { searchProducts } from '../../store/product';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetchCartItems, clearCart} from '../../store/cartItem';
+import Address from '../Address/Address';
 
 const Header = () => {
   const user = useSelector(state => state.session.user);
@@ -20,6 +21,7 @@ const Header = () => {
   const cartItems = useSelector(state => state.cartItems);
   const quantities = Object.values(cartItems);
   const totalQuantity = quantities.reduce((sum, item) => sum += item.quantity, 0);
+  const [showModal, setShowModal] = useState(false);
 
 
   const handleMouseEnter = () => {
@@ -96,15 +98,13 @@ return (
       </div>
 
     {/* ADDRESS BUTTON */}
-    <NavLink to="/addresses"  style={{textDecoration: "none"}}>
-    <div className='address-section'>
+    <div  onClick={() => setShowModal(true)} className='address-section'>
             <div className='address-icon' />
         <div className='header-address-button'>
             <div className='address-greeting'>Hello,</div> 
             <div className='address-select'>Select your address</div>
         </div>
     </div>
-    </NavLink>
 
 
     {/* SEARCH BAR */}
@@ -161,23 +161,20 @@ return (
               {isDropdownOpen && (
                 <div className="dropdown__menu">
                     <div className='your-account'>Your Account</div>
-                  <NavLink className='dropdown-links' to="/addresses">Manage addresses</NavLink>
-                  <NavLink className='dropdown-links' to="/returns">Manage orders</NavLink>
+                  <div onClick={() => setShowModal(true)} className='dropdown-links' >Manage addresses</div>
+                  <div onClick={() => setShowModal(true)} className='dropdown-links'>Manage orders</div>
                   <NavLink className='dropdown-links' to={(pathname === '/cart' ? '/cart' : '/')} onClick={handleLogout}>Sign out</NavLink>
                 </div>
-              )}
+              )} 
           </div>}
                 {isDropdownOpen && <div className='dropdown-up-arrow'></div>}
       </div>
 
     {/* RETURNS AND ORDERS */}
-    <NavLink to="/returns"  style={{textDecoration: "none"}}>
-      <div className="header-return-and-orders">
+      <div  onClick={() => setShowModal(true)} className="header-return-and-orders">
             <div className="header-returns">Returns</div>
             <div className="header-orders">& Orders</div>
       </div>
-      </NavLink>
-
 
     {/* CART-ITEMS */}
     
@@ -195,7 +192,7 @@ return (
       </div>
       </NavLink>
           
-    
+    <Address show={showModal} onClose={() => setShowModal(false)} />
 </div>
   );
 }
