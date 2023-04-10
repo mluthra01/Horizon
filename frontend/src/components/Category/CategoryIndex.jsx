@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProductsByCategory, recieveProductsByCategory } from '../../store/category';
@@ -9,10 +9,12 @@ import RatingStars from '../RatingStars/RatingStar';
 const CategoryIndex = () => {
 const { categoryId } = useParams();
 const dispatch = useDispatch();
-const products = useSelector(recieveProductsByCategory());
+const [loading, setLoading ] = useState(true)
+const products = useSelector(recieveProductsByCategory(categoryId));
 
 useEffect(() => {
-    dispatch(fetchProductsByCategory(categoryId))
+    dispatch(fetchProductsByCategory(categoryId)).then(() => setLoading(false))
+    // setLoading(false)
 },[dispatch, categoryId]);
 
   let categoryName;
@@ -36,7 +38,16 @@ useEffect(() => {
   };
 
     if (!products) return null;
-    
+        if (loading) {
+  return (
+  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <p style={{ fontSize: "18px", fontWeight: "bold" }}>Loading...</p>
+    </div>
+  </div>
+);
+  }
+
     return (    
     <div className="all-products-container">
         <div className="product-category-title">
@@ -66,7 +77,7 @@ useEffect(() => {
             </div>
               </NavLink>
           </li>
-          ))};
+          ))}
         </ul>
     </div>
   

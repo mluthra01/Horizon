@@ -106,7 +106,7 @@ export const fetchUpdateCart = (cartItemId, count) => async dispatch => {
 
 export const fetchDeleteCartItem = (productId) => async dispatch => {
     const response = await csrfFetch(`/api/cart_items/${productId}`, {
-        method: 'Delete'
+        method: 'DELETE'
     });
 
         if (response.ok) {

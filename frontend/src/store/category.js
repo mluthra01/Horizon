@@ -9,9 +9,16 @@ export const getProductByCategory = (products) => {
     };
 };
 
-export const recieveProductsByCategory = () => (state) => {
-    return state.products ? Object.values(state.products) : [];
-};
+// export const recieveProductsByCategory = () => (state) => {
+//     return state.products ? Object.values(state.products) : [];
+// };
+export const recieveProductsByCategory = (categoryId) => (state) => {
+  if (!state.products) {
+    return [];
+  }
+  const numCategoryId = parseInt(categoryId, 10);
+  return Object.values(state.products).filter(product => product.categoryId === numCategoryId);
+}
 
 export const fetchProductsByCategory = (categoryId) => async dispatch => {
     
