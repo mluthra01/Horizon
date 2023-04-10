@@ -39,7 +39,7 @@ const SignUpFormPage = () => {
                         setErrors(data.errors) 
                     }
                     else if (data) {
-                        setErrors( [data]);
+                        setErrors( ["Please enter all required fields"]);
                     }
                     else {
                         setErrors([ response.statusText]);
@@ -49,8 +49,6 @@ const SignUpFormPage = () => {
             
             return setErrors(['Passwords do not match'])
     };
-
-
 
     return (
         <div className="signup-form-container">
@@ -64,8 +62,13 @@ const SignUpFormPage = () => {
             <form onSubmit={handleSubmit} className="signup-form">
                 <h1>Create account</h1>
                 <ul className="signup-form-errors">
-                    {errors.map(error => <li key={error}>{error}<br/></li>)}
-                </ul>
+                    {errors.map(error => 
+                    <li key={error}>
+                    {error}
+                    </li>
+                    )}
+                </ul> 
+
                 <label className="signup-form-label">Your name
                     <input
                         type='text'
