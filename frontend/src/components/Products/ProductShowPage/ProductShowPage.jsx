@@ -7,6 +7,7 @@ import './ProductShowPage.css'
 import { useHistory } from "react-router-dom";
 import Review from "../../Reviews/Reviews";
 import RatingStars from "../../RatingStars/RatingStar";
+import { clearCartItems } from "../../../store/cartItem";
 import {  receiveReviews } from "../../../store/review";
 
 
@@ -65,16 +66,22 @@ const deliveryMessage = `FREE delivery ${deliveryDay}, ${deliveryDate.toLocaleDa
 Order within ${Math.floor(Math.random() * 12) + 1} hrs ${Math.floor(Math.random() * 60)} min`;
 
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     const item = {productId: productId, quantity: count}
     if (user) {
-        dispatch(fetchAddToCart(item));
+    await dispatch(fetchAddToCart(item));
     }
     else {
         history.push('/login')
     };
 };
+const handleBuyNowSubmit = (e) => {
+    e.preventDefault();
+    dispatch(clearCartItems());
+    history.push('/checkout')
+};
+
 
 const price = parseFloat(product.price).toFixed(2)
 const [wholePrice, fractionPrice] = price.split('.')
@@ -155,14 +162,14 @@ const [wholePrice, fractionPrice] = price.split('.')
                                 </input>
                         </div>
                     </form>
-                    <div className="buy-now-form">
+                    <form onSubmit={handleBuyNowSubmit} className="buy-now-form">
                         <input 
                             type='submit'
                             className="buy-now-btn"
                             value='Buy now'
                             >
                         </input>
-                    </div>
+                    </form>
                     <div className='secure-transaction'>
                         <div className='secure-transaction-icon'>
                             <img src="https://d1irxr40exwge2.cloudfront.net/secure.png" alt="Secure icon" height="15px" />

@@ -4,9 +4,11 @@ import { fetchProducts, receiveProducts} from "../../../store/product"
 import { receiveReviews } from "../../../store/review";
 import './ProductIndex.css'
 import ProductItem from "./ProductItem/ProductItem";
+import { useState } from "react";
 const ProductIndex = () => {
     const products = useSelector(receiveProducts);
     const reviews = useSelector(receiveReviews);
+    const [isLoading, setIsLoading ] = useState(true)
 
     const dispatch = useDispatch();
 

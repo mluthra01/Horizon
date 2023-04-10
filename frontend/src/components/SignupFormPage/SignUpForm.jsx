@@ -74,7 +74,9 @@ const SignUpFormPage = () => {
                         // required
                         placeholder='First and last name'
                         className='signup-form-input'
+        
                         />
+                        
                 </label >
                 <label  className="signup-form-label"> Email
                     <input 

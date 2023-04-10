@@ -15,6 +15,7 @@ const products = useSelector(receiveProducts);
 const [subtotal, setSubtotal] = useState(0.0);
 const cartItems = useSelector(state => state.cartItems);
 const carts = Object.values(cartItems)
+
 const allCartItems = products.map((product) => (
     <div key={product.id} >
         <CartItem  product={product} />

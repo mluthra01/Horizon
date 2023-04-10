@@ -88,6 +88,7 @@ export const fetchAddToCart = (cartItem) => async dispatch => {
         if (response.ok) {
             const cartItem = await response.json();
             dispatch(addToCart(cartItem));
+            return cartItem;
         };
 };
 

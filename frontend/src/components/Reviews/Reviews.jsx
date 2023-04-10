@@ -21,11 +21,9 @@ const userId = useSelector((state) => state.session.user?.id);
     if (rating > 0) {
     rating = (rating / reviews.length).toFixed(1);
     }
-    const handleDeleteClick = (e) => {
-    e.preventDefault();
-    dispatch(deleteReview(reviewId));
-    history.push(`/products/${productId}`);
-    };
+
+const userReviews = reviews.filter(review => review.userId === userId);
+const alreadyReviewed = userReviews.length > 0;
 
     return (
         <div className="product-review-container">
@@ -48,13 +46,17 @@ const userId = useSelector((state) => state.session.user?.id);
                     </div>
                 </div>
                 <div className="reviewer-create-btn-container">
-                <NavLink 
-                    className="link-to-create-review"
-                    to={`/products/${productId}/review`}
+                {alreadyReviewed ? (
+                    <div className="link-to-create-review">You have already reviewed this product.</div>
+                ) : (
+                    <NavLink
+                        className="link-to-create-review"
+                        to={`/products/${productId}/review`}
                     >
                         Write a customer review
-                </NavLink>
-                </div>
+                    </NavLink>
+                )}
+            </div>
                 <hr />
             </div>
             <div className="review-show-container">

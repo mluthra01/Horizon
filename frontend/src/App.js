@@ -71,6 +71,7 @@ function App() {
         <Footer />
       </Route>
       <Route exact path="/checkout">
+        <Header />
         <Checkout />
       </Route>
       <Route exact path="/products/:productId/review/:reviewId?">

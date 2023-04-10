@@ -22,7 +22,6 @@ class Review < ApplicationRecord
                 message: "rating must be between 1 and 5"
             }
 
-
     belongs_to :user,
         foreign_key: :user_id,
         class_name: :User
