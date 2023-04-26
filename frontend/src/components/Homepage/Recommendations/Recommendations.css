@@ -77,3 +77,41 @@
     font-size: 18px;
     font-weight: 700;
 }
+
+/* Add media queries for different screen sizes */
+
+/* For mobile screens */
+@media (max-width: 767px) {
+    .recommend-card {
+        width: calc(100% - 20px);
+    }
+
+    .recommendations-heading {
+        font-size: 36px;
+    }
+}
+
+/* For tablet screens */
+@media (min-width: 768px) and (max-width: 991px) {
+    .recommend-card {
+        width: calc(50% - 20px);
+    }
+
+    .recommendations-heading {
+        font-size: 40px;
+    }
+}
+
+/* For small desktop screens */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .recommend-card {
+        width: calc(33.33% - 20px);
+    }
+}
+
+/* For large desktop screens */
+@media (min-width: 1200px) {
+    .recommend-card {
+        width: calc(25% - 20px);
+    }
+}

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 .carousel {
     width: 100%;
@@ -16,20 +17,37 @@
     justify-content: center;
 }
 
+
+
+
 .card-container{
-    position: relative;
+    /* position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
     height: 400px;
     width: 380px;
     background-color: white;
     box-shadow: 0px 15px 35px #888888;
     margin: 50px 20px;
     transition: all 0.5s ease-in-out;
-    bottom: 300px;
 
+}
+
+.card-wrap {
+    position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    bottom: 300px;
+        /* flex-wrap: wrap;
+        height: 400px;
+        width: 380px;
+        background-color: white;
+        box-shadow: 0px 15px 35px #888888;
+        margin: 50px 20px;
+        transition: all 0.5s ease-in-out; */
 }
 
 .grid-box {

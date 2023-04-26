@@ -9,6 +9,7 @@ return (
             <div className='carousel'>
                 <Carousel  />
             </div>
+        <div className='card-wrap'>
             <div className='card-container'>
                 <div className='grid-box'>
                     <NavLink style={{textDecoration: "none"}}to={'/category/1'}><div className='card-label'>Electronics</div></NavLink>
@@ -196,6 +197,7 @@ return (
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
                 <div className='recommendations'> 
                 < Recommendations style={{textDecoration: "none"}} />
