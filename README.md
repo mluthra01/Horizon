@@ -18,10 +18,87 @@ Horizon is a full-stack e-commerce application that allows users to browse avail
   
 https://user-images.githubusercontent.com/71748091/224383971-36de4464-5120-4e37-a559-040ae60c8b7f.mov
 
-## Future Implementations
+
+## Important Code
+ ### Handling cart quantity so it doesnt add duplicate item when adding quantity
+``` ruby
+def create  
+        @user = current_user
+        @cart_item = CartItem.find_by(product_id: params[:product_id])
+        
+        if @cart_item 
+                @cart_item.quantity += params[:cart_item][:quantity].to_i
+                
+        else
+            @cart_item = CartItem.new(cart_item_params)
+            @cart_item.user_id = current_user.id
+            
+        end
+        if @cart_item.save
+            
+            render :show
+        else
+            render json: {errors: "this is wrong"}, status: 422
+        end
+
+    end
+```
+
+### Search Route
+``` javascript
+ def index
+        if params[:category_id]
+            @category = Category.find(params[:category_id])
+            @products = @category.products
+        else
+            @products = Product.all
+        end
+        if params[:search]
+            @products = @products.where('lower(name) LIKE ?', "%#{params[:search].downcase}%")
+        end
+                
+            render 'api/products/index'
+    end
+```
+### Handling Review Creation and Editing Dynamically
+
+``` Ruby 
+    const [errors, setErrors ] = useState([]);
+    const [headline, setHeadline] = useState(review ? review.headline ? review.headline : '' : '');
+    const [body, setBody] = useState(review ? review.body ? review.body : '' : '');
+    const [rating, setRating] = useState(review ? review.rating ? review.rating : '' : '');
+
+    if (userId === undefined) history.push("/login");
+    if (!product) return null;
+
+    const handleSubmit =  (e) => {
+        e.preventDefault();
+
+        const reviewData = {
+            ...review,
+            headline,
+            body,
+            rating,
+            userId,
+            productId
+        }
+        setErrors([]);
+        if (formType === "Edit Review") {
+        dispatch(updateReview(reviewData))
+            .then(() => {
+            history.push(`/products/${productId}`)
+        })
+            .catch(handleError);
+        } else {
+        dispatch(createReview({ productId, userId, headline, body, rating }))
+        .then(() => {
+            history.push(`/products/${productId}`)
+        })
+            .catch(handleError);
+        }
+    }
+```
+ ## Future Implementations
   + Make users able to list products
   + Add a return, orders and  address section
   + Buy now Modal that let user buy the item directly from the Product listing
-
-
-
